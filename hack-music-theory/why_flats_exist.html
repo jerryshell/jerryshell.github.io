@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Why Flats Exist 为什么会有降号 - Hack Music Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Hack Music Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="why-flats-exist-为什么会出现降号"><a class="header" href="#why-flats-exist-为什么会出现降号">Why Flats Exist 为什么会出现降号</a></h1>
+<h2 id="hack"><a class="header" href="#hack">Hack</a></h2>
+<p>Every major and minor scale must contain the first seven letters of the alphabet, otherwise things get confusing.</p>
+<p>每个大调和小调都必须包含字母表的前七个字母，否则会变得很混乱。</p>
+<p>If you’re working out a scale and you get to an A, and your formula says the next note is one semitone up (A♯), it must be referred to by its enharmonic (B♭), otherwise the scale will have two As and no B.</p>
+<p>如果你在构建一个音阶，到了 A，而你的公式说下一个音是半音上升（A♯），此时必须用等音（B♭）来表示，否则音阶中会有两个 A 而没有 B。</p>
+<p>This is the sole reason for the existence of flats.</p>
+<p>这就是降号存在的唯一原因。</p>
+<p><img src="figure_7_1.png" alt="Figure 7.1" /></p>
+<p>Figure 7.1 In F major, one semitone up from A must be referred to as B♭</p>
+<p>图 7.1 在 F 大调中，从 A 向上一个半音应称作 B♭</p>
+<p><img src="figure_7_2.png" alt="Figure 7.2" /></p>
+<p>Figure 7.2 In G minor, we rename A♯ to B♭ and D♯ to E♭, in order for the scale to contain all seven letters</p>
+<p>图 7.2 在 G 小调中，我们将 A♯ 重命名为 B♭，将 D♯ 重命名为 E♭，以便音阶包含所有七个音符。</p>
+<p>Remember, key signatures consist of either sharps or flats, not both.</p>
+<p>请记住，调号要么由升号组成，要么由降号组成，不会两者都有。</p>
+<h2 id="chaper"><a class="header" href="#chaper">Chaper</a></h2>
+<p>A♯ and B♭ are two different names for the same note, so why don’t we just call the note A♯ all the time?</p>
+<p>A♯ 和 B♭ 是同一个音符的不同名称，那为什么我们不一直叫这个音符 A♯ 呢？</p>
+<p>This is a great question, and provides me with the perfect opportunity to bust out another metaphor.</p>
+<p>这是一个很好的问题，也给了我一个使用另一个比喻的绝佳机会。</p>
+<p>When I was teaching at the college in London, we hired a new lecturer named Will, and all was well in the music department.</p>
+<p>当我在伦敦的学院教书时，我们聘请了一位名叫威尔的新讲师，一切都很好。</p>
+<p>Then we went on to hire another new lecturer, also named Will, and order descended into chaos within our music team.</p>
+<p>然后我们又聘请了一位新讲师，也叫威尔，音乐团队随即陷入混乱。</p>
+<p>Will the Second decided to do the right thing and kindly volunteered himself for a name change to Bill.</p>
+<p>第二位威尔决定做正确的事情，友好地自愿改名为比尔。</p>
+<p>This was the only way we could avoid confusion, and it’s exactly the same in music.</p>
+<p>这是我们避免混淆的唯一方法。在音乐中也是如此。</p>
+<p>For example, when we work out the F major scale, we notice that the 3rd note is A and the 4th note is one semitone up from that (A♯).</p>
+<p>例如，当我们计算 F 大调音阶时，我们注意到第 3 个音符是 A，第 4 个音符是半音上升的 A♯。</p>
+<p>We now have two As in our team, which is thoroughly ambiguous, so we need to give the second A another name.</p>
+<p>现在我们的音阶中有两个 A，导致非常模糊，所以我们需要给第二个 A 起另一个名字。</p>
+<p>Once again, enharmonics save the day. By using the other name for A♯ (i.e. B♭), everything is crystal clear when we’re writing, reading, discussing, and playing music in F major.</p>
+<p>再次使用等音记号，通过使用 A♯ 的另一个名字（即 B♭），当我们在 F 大调中写、读、讨论和演奏音乐时，一切都清楚了。</p>
+<p>This is the sole reason for the existence of flats, and understanding this concept allows us to fully appreciate that having two names for each note doesn’t make things more complicated: it actually prevents confusion and makes everything much simpler.</p>
+<p>这就是降号存在的唯一原因。理解这个概念让我们能够充分理解，给每个音符两个名字不会使事情变得更复杂，相反，它实际上防止了混乱，使一切变得更加简单。</p>
+<p>I really dig how this also ensures that each note is treated equally, and while they’re all connected and working together as a team, they’re still individuals with individual names.</p>
+<p>我非常欣赏这种处理方式不仅确保了每个音符都被平等对待，虽然它们都是相互连接并一起合作的团队成员，但它们仍是有自己名字的个体。</p>
+<p>How beautifully reflective of life and of a society living in harmony.</p>
+<p>这美丽地反映了生活和一个和谐的社会。</p>
+<p>This is why, depending on the context, it can be incorrect to refer to a note by its other name (as we mentioned in chapter 2), like in F major where there’s no A♯, only B♭.</p>
+<p>这就是为什么根据上下文，用另一个名字称呼一个音符可能是错误的（如我们在第二章提到的），例如在 F 大调中没有 A♯，只有 B♭。</p>
+<p>Let’s do another one for practice, and let’s try a minor this time.</p>
+<p>让我们再练习一次，这次我们试试一个小调音阶。</p>
+<p>How about G minor? Take a few minutes to figure it out yourself, and, when you’re done, have a look at my version and see if you got all the names correct for your new crew.</p>
+<p>我们试试 G 小调怎么样？花几分钟时间自己尝试一下，完成后看看我的版本，看看你是否正确地命名了所有音符。</p>
+<p><img src="figure_7_2.png" alt="Figure 7.2" /></p>
+<p>In G minor, we end up with two friends who need renaming.</p>
+<p>在 G 小调中，我们最终得到两个需要重新命名的音符。</p>
+<p>First, the A♯ is renamed B♭; second, the D♯ is renamed E♭.</p>
+<p>首先，A♯ 被重命名为 B♭；其次，D♯ 被重命名为 E♭。</p>
+<p>The key signature of G minor is therefore B♭ and E♭.</p>
+<p>因此，G 小调的调号是 B♭ 和 E♭。</p>
+<p>It’s worth noting that in both major and natural minor scales, you’ll only ever have sharps or flats, never both.</p>
+<p>值得注意的是，在大调和自然小调音阶中，你只会遇到升号或降号，而不会同时都有。</p>
+<p>In other words, your key signatures consist of either sharps or flats.</p>
+<p>换句话说，你的调号要么是升号，要么是降号。</p>
+<p>This will help keep you on the right path: if you’re working out a major or natural minor scale and end up with both sharps and flats, then something must’ve gone wrong somewhere.</p>
+<p>这有助于保持正确的方向：如果你在计算大调或自然小调音阶时，出现了升号和降号，那肯定是某个地方出错了。</p>
+<p>Double-check the formula and count those intervals again.</p>
+<p>请再次检查公式并重新计算这些音程。</p>
+<p>Now that everyone’s here and happy with their names and individuality, we can continue respectfully, sans confusion.</p>
+<p>现在大家都在对自己的名字和个体感到满意，我们就可以继续以尊重的态度进行，不会产生混淆。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="finding_relatives.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="difference_between_major_and_minor_scales.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="finding_relatives.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="difference_between_major_and_minor_scales.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

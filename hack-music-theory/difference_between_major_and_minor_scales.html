@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Difference Between Major &amp; Minor Scales 大调与小调的区别 - Hack Music Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Hack Music Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="difference-between-major--minor-scales-大调与小调的区别"><a class="header" href="#difference-between-major--minor-scales-大调与小调的区别">Difference Between Major &amp; Minor Scales 大调与小调的区别</a></h1>
+<h2 id="hack"><a class="header" href="#hack">Hack</a></h2>
+<p>‘Happy’ major scales and ‘sad’ minor scales share four notes (1 2 4 5), while the other three notes (3 6 7) are different.</p>
+<p>“快乐”的大调音阶和“悲伤”的小调音阶共有四个相同的音符（1 2 4 5），而另外三个音符（3 6 7）不同。</p>
+<p>The reason for these scales’ opposite emotions must therefore lie within these three different notes.</p>
+<p>因此，这些音阶情感相反的原因就在于这三个不同的音符。</p>
+<p>The 3rd, 6th and 7th notes are one semitone lower in natural minor scales than they are in major scales.</p>
+<p>在自然小调中，第 3、第 6 和第 7 个音符比大调中的对应音符低一个半音。</p>
+<p>To represent this one semitone down, we add a flat (♭) to their spelling.</p>
+<p>为了表示这个低一个半音的变化，我们在它们的拼写中加上一个降号（♭）。</p>
+<p>By their spelling, these flats tell us that their associated notes are one semitone down from where they are in a major scale.</p>
+<p>通过拼写，这些降号指出这些关联的音符比大调音阶中的位置低一个半音。</p>
+<p>They don’t tell us that the notes (i.e. letters) themselves are flats, like in A minor (below) where the ♭3 is C, a natural note.</p>
+<p>它们并不意味着这些音符（即字母）本身是降号，比如在 A 小调中（如下所示），降三音是 C，这是一个自然音。</p>
+<p><img src="figure_8_1.png" alt="Figure 8.1" /></p>
+<p>Figure 8.1 Comparison of A major scale to A natural minor scale</p>
+<p>图 8.1 A 大调音阶与 A 自然小调音阶的比较</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead><tbody>
+<tr><td>Major scale<br/>大调</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+<tr><td>Natural minor scale<br/>自然小调</td><td>1</td><td>2</td><td>♭3</td><td>4</td><td>5</td><td>♭6</td><td>♭7</td><td>8</td></tr>
+</tbody></table>
+</div>
+<p>Figure 8.2 Comparison of major and natural minor scale spellings</p>
+<p>图 8.2 大调与自然小调的音符拼写比较</p>
+<p>All major scales have the same underlying semitone formula and therefore the same spelling, and all natural minor scales have the same formula and spelling.</p>
+<p>所有大调都有相同的半音公式，因此音符拼写相同；所有自然小调也有相同的公式和拼写。</p>
+<p>Remember, we write spellings and notes the way we say them.</p>
+<p>请记住，我们按发音写音符和拼写。</p>
+<p>For example, flat three is written as ♭3 (sign before number), and F sharp is written as F♯ (sign after letter).</p>
+<p>例如，降三音写作 ♭3（符号在数字前），F 升写作 F♯（符号在字母后）。</p>
+<h2 id="chapter"><a class="header" href="#chapter">Chapter</a></h2>
+<p>I know you’ve already read the title of this chapter and answered: Major scales sound happy and minor scales sound sad, done deal, next chapter please.</p>
+<p>我知道你已经读了这一章的标题，并回答：大调听起来快乐，小调听起来悲伤，搞定了，请看下一章吧。</p>
+<p>You are correct, congrats!</p>
+<p>你答对了，恭喜你！</p>
+<p>But before we move on, I’m going to briefly whisk you away on a nostalgic detour.</p>
+<p>但在我们继续之前，我会带你稍微走一段怀旧的弯路。</p>
+<p>Ready?</p>
+<p>准备好了吗？</p>
+<p>Remember when we were kids, what our favourite follow-up question to every question we ever asked was?</p>
+<p>还记得我们小时候每次问问题后最喜欢的后续问题是什么吗？</p>
+<p>Of course, it was “why?” This one syllable would simultaneously empower our learning about the world while providing endless amusement as we watched adults squirm through ‘explanations’ of things they didn’t understand themselves.</p>
+<p>当然，是“为什么？”这个单音节词既能让我们了解世界，同时也能在看到大人们挣扎着解释自己都不理解的事物时，给我们带来无尽乐趣。</p>
+<p>Why is the sky blue?</p>
+<p>天空为什么是蓝色的？</p>
+<p>Why did Milli Vanilli win a Grammy for lip-syncing?</p>
+<p>米利·凡利为什么因为假唱赢得了格莱美奖？</p>
+<p>Why does the paradox encountered in quantum entanglement work?</p>
+<p>量子纠缠中遇到的悖论是怎么运作的？</p>
+<p>You know, just the usual kid stuff.</p>
+<p>你懂的，这就是孩子们关心的通常问题。</p>
+<p>It’s heartbreaking how our wonder dissolves into indifference as we grow older.</p>
+<p>令人难过的是，随着我们长大，我们对世界的好奇心逐渐消失，变得冷漠。</p>
+<p>I’ll never forget the time many years ago when I stopped my car at a pedestrian crossing to let a father and son cross the road.</p>
+<p>我永远不会忘记多年前的一次，我在一个人行横道停车让一对父子过马路。</p>
+<p>As they walked in front of me I was struck by the shockingly vast divide between the adult and the child.</p>
+<p>当他们在我面前走过时，我震惊于大人与孩子之间的巨大差距。</p>
+<p>The dad’s gaze was firmly fixed on the ground with the weight of the world on his shoulders, while the child skipped along fuelled by inquisitiveness as he peered up at the infinite possibilities of the world.</p>
+<p>父亲的目光牢牢地盯着地面，肩上似乎承载着全世界的重担，而孩子则带着强烈的好奇心蹦跳着，仰望着世界的无限可能。</p>
+<p>Please, let’s regularly remind ourselves to reconnect with our inquisitive younger selves, as that’s the most effective and fun way to learn and live.</p>
+<p>请我们时常提醒自己，与我们充满好奇心的年轻自我重新连接，因为这是一种最有效也最有趣的学习和生活方式。</p>
+<p>I always make a deal with my students in their very first theory lesson: if they ever ask why something is the way it is or why it’s relevant, and I can’t explain, then they don’t have to learn it.</p>
+<p>我总是在学生的第一堂理论课上与他们达成一个协议：如果他们问为什么某样东西是那样，或者为什么它重要，而我不能解释清楚，那么他们就不用学习它。</p>
+<p>This keeps us all on our toes.</p>
+<p>这让我们都保持警惕。</p>
+<p>Be warned, though: I’ve never lost.</p>
+<p>不过请注意：我从未输过。</p>
+<p>A little bragging about this fact always helps to motivate my students to be even more curious, if only to be able to say they beat me and claim the prize as the first person ever to win this challenge.</p>
+<p>稍微吹嘘一下这个事实总能激励我的学生们更加好奇，即使只是为了能够说他们打败了我并赢得了这个挑战的奖励。</p>
+<p>Now that you’re in touch with your inner why-kid, I guess you’re thinking: I can hear that majors are happy and minors are sad, but why?</p>
+<p>现在你已经联系上了你内心的“为什么小孩”，我猜你在想：我能听出来大调听起来快乐，小调听起来悲伤，但为什么呢？</p>
+<p>The best way to discover the differences between major and minor scales is to put them side by side and compare their notes.</p>
+<p>发现大调和小调之间区别的最好方法是把它们并排放置并比较它们的音符。</p>
+<p>Let’s do this with A major and A minor.</p>
+<p>让我们用 A 大调和 A 小调来做这个练习。</p>
+<p>As you can see below, there are four notes that are the same (1 2 4 5) and three notes that are different (3 6 7).</p>
+<p>如下所示，有四个音符是相同的（1 2 4 5），有三个音符不同（3 6 7）。</p>
+<p>The 3rd note in A major is C♯ and the 3rd note in A minor is C, which means the 3rd note in a minor scale is one semitone lower than the 3rd note in a major scale.</p>
+<p>A 大调中的第三个音是 C♯，而 A 小调中的第三个音是 C，这意味着小调中的第三个音比大调中的第三个音低一个半音。</p>
+<p>To show this we add a flat (♭), which represents one semitone down, to the spelling of the 3rd note in minor scales (i.e. ♭3).</p>
+<p>为了表示这一点，我们在小调中的第三个音符拼写中添加一个降号（♭），即 ♭3。</p>
+<p>The same thing happens with the 6th and 7th notes in natural minor scales, as they’re also one semitone lower than their major counterparts.</p>
+<p>同样的情况也发生在自然小调的第六和第七音符上，因为它们也比对应的大调音符低一个半音。</p>
+<p><img src="figure_8_1.png" alt="Figure 8.1" /></p>
+<p>As all major scales have the same formula, and all natural minor scales have the same formula, the differences we have found between A major and A minor are the same for every major and natural minor scale.</p>
+<p>由于所有大调具有相同的公式，所有自然小调音阶也具有相同的公式，因此我们发现 A 大调和 A 小调之间的差异对每个大调和自然小调音阶都是相同的。</p>
+<p>We can conclude by saying the spelling of all natural minor scales is: 1 2 ♭3 4 5 ♭6 ♭7 8, where the flats tell us that those notes are one semitone down from where they are in major scales.</p>
+<p>我们可以得出结论，所有自然小调音阶的音符拼写为：1 2 ♭3 4 5 ♭6 ♭7 8，其中的降号表示这些音符比大调音阶中的音符低一个半音。</p>
+<p>But whyyyyy???</p>
+<p>但是为什么呀???</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="why_flats_exist.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="difference_between_major_and_minor_triads.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="why_flats_exist.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="difference_between_major_and_minor_triads.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

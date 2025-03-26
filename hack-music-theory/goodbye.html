@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>GOODBYE 再见 - Hack Music Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Hack Music Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="goodbye-再见"><a class="header" href="#goodbye-再见">GOODBYE 再见</a></h1>
+<p>Woohoo!!! Congratulations, I am beyond proud of you for staying the course through Part 1 of my Hack Music Theory book series.</p>
+<p>哇哦!!! 祝贺你，我为你能够坚持完成我《Hack Music Theory》书系列的第一部分而感到无比自豪。</p>
+<p>You have now graduated from the first level of MSOL (Music for Speakers of Other Languages)!</p>
+<p>你现在已经完成了 MSOL（音乐为其他语言使用者而设）的第一阶段！</p>
+<p>Okay, I just made that up, but the other bit is true: you’ve reached what I call the foundation stage of music theory.</p>
+<p>好吧，我刚刚编的这个名字，不过其他部分是真的：你已经达到了我所说的音乐理论基础阶段。</p>
+<p>You’re now empowered to understand and use the basics of your new language to appreciate what’s going on in your favourite songs and, most importantly, to liberate your imagination and start making your own music.</p>
+<p>你现在有能力去理解并使用这门新语言的基础知识，来欣赏你喜欢的歌曲中发生的事情，最重要的是，释放你的想象力，开始创作属于你自己的音乐。</p>
+<p>Yes, of course, there’s still a lot to learn, but it will all be built on this foundation you have so solidly laid.</p>
+<p>是的，当然，还有很多东西需要学习，但这一切都将建立在你已经打下的坚实基础之上。</p>
+<p>As you now know, western music consists of a mere twelve notes, and we usually only use seven of them at a time.</p>
+<p>现在你知道了，西方音乐只有十二个音符，我们通常一次只使用其中的七个。</p>
+<p>These seven-note groups are our scales and form the basis of all our music.</p>
+<p>这七个音符组合就是我们的音阶，构成了我们所有音乐的基础。</p>
+<p>Scales are our musical menu, and like my favourite Chinese vegan restaurant downtown, Lotus Pond, where I order by number, you also order by number in Restaurant de la Musique (it sounds way fancier in French, doesn’t it?).</p>
+<p>音阶就像是我们的音乐菜单，就像我最喜欢的位于市中心的中国素食餐厅莲花池，我按编号点菜，你也可以在音乐餐厅 de la Musique 按编号点菜（用法语说起来是不是更高级呢？）。</p>
+<p>Perhaps it’s a gorgeous summer evening and you’re in the mood for something light and sweet, so you tuck into a harmonious buffet of 1 3 5 succulent salads that are deliciously uplifting.</p>
+<p>或许是一个美丽的夏夜，你心情轻松愉快，想要一些清淡甜美的食物，于是你享用了一顿和谐的 1 3 5 沙拉自助餐，美味又让人愉快。</p>
+<p>To complement your dinner, you grab a melodious mix of 2 7 5 6 freshly-squeezed drinks, which you sip one at a time.</p>
+<p>为了搭配你的晚餐，你选择了悦耳的 2 7 5 6 新鲜果汁，一口一口地品味。</p>
+<p>This major feast of delights is completely customised, ordered by you for you.</p>
+<p>这顿主要的美味盛宴完全是为你定制的，由你自己点的。</p>
+<p>Nobody else in the restaurant is eating the exact same meal as you, even though they’re all ordering from the same musical menu.</p>
+<p>虽然餐厅里的其他人也从同一个音乐菜单上点餐，但没有人在吃和你完全一样的餐点。</p>
+<p>There are unlimited combinations of yumminess, as is evident from over half a millennium of music all pretty much ordered from the same menu.</p>
+<p>美味的组合是无限的，从过去五百多年几乎都从同一个菜单上点餐的音乐中可以证明这一点。</p>
+<p>So sit down, order a combo meal and drinks, see if you enjoy them, and then do it all again.</p>
+<p>所以坐下来，点一个套餐和饮品，看看你是否喜欢，然后再来一次。</p>
+<p>And again. And again.</p>
+<p>一次又一次。</p>
+<p>It’s not about coming up with the perfect musical meal, it’s about trying everything and finding your own unique preferences, which ironically will probably change as soon as you find ’em!</p>
+<p>不是要创作出完美的音乐大餐，而是尝试一切，寻找你自己的独特偏好，而讽刺的是，一旦你找到了这些偏好，它们很可能会立刻改变！</p>
+<p>Please remember, perfection is rather easy to achieve when you make music using theory, but perfection is never the goal.</p>
+<p>请记住，当你用理论创作音乐时，达到完美相对容易，但完美从来不是目标。</p>
+<p>Perfection is usually thought of as the quality of being free from flaws, and understanding the language of music (music theory) will ensure you always compose flawless music – that is, musical words with correct spelling, musical sentences with good grammar, musical paragraphs with thoughtful structure, and musical essays with coherency.</p>
+<p>完美通常被认为是无瑕疵的品质，而理解音乐语言（音乐理论）将确保你总能创作出无瑕疵的音乐——即，正确拼写的音乐词汇、语法良好的音乐句子、结构周到的音乐段落，以及连贯的音乐文章。</p>
+<p>However, music is a science and an art.</p>
+<p>然而，音乐既是科学也是艺术。</p>
+<p>Science is theoretical, but art is creative.</p>
+<p>科学是理论性的，但艺术是创造性的。</p>
+<p>It won’t take very long for you to master the scientific side, as you’re only ever working with twelve elements.</p>
+<p>掌握科学的一面不会花很长时间，因为你只需要处理十二个元素。</p>
+<p>However, the musical stories you can tell with them are truly infinite.</p>
+<p>然而，你可以用它们讲述的音乐故事却是无限的。</p>
+<p>Last, please remember this too.</p>
+<p>最后，请记住这一点。</p>
+<p>Music theory forms a multi-layered protective bubble around music makers, which gives us confidence in knowing that our music is perfectly composed, while also accepting that people’s opinions of our music are purely subjective and based on personal taste.</p>
+<p>音乐理论为音乐创作者形成了一层多层的保护泡泡，这让我们有信心知道我们的音乐是完美编写的，同时也接受人们对我们音乐的看法完全是主观的，基于个人喜好。</p>
+<p>Therefore, forming your protective bubble is arguably the most valuable investment you can make as a musician.</p>
+<p>因此，形成你自己的保护泡泡可以说是你作为音乐人能做的最有价值的投资。</p>
+<p>It allows us to truly have fun creating and sharing our music, without any stress, self-doubt, or the need for validation.</p>
+<p>它让我们能够真正地享受创作和分享音乐的乐趣，没有任何压力、自我怀疑或需要他人认可的需求。</p>
+<p>Your bubble may only be one layer thick at the moment, but that’s enough for you to safely commence your musical journey.</p>
+<p>目前你的泡泡可能只有一层，但这已经足够让你安全地开始你的音乐旅程。</p>
+<p>Go forth and compose, my fellow bubble buddy, and I’ll see you in the second book of the series where we’ll add your second protective layer!</p>
+<p>去吧，创作吧，我的泡泡朋友，我们将在这个系列的第二本书中再为你的泡泡添加第二层保护！</p>
+<p>Musica longa, vita brevis.</p>
+<p>音乐长久，人生短暂。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chord_symbols.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="test.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chord_symbols.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="test.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

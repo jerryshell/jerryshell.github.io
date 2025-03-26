@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Tuning 调音 - Hack Music Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Hack Music Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="tuning-调音"><a class="header" href="#tuning-调音">Tuning 调音</a></h1>
+<h2 id="hack"><a class="header" href="#hack">Hack</a></h2>
+<p>Tuning means two things.</p>
+<p>调音有两层含义。</p>
+<p>First, we tune our instruments and voices in order to play and sing the correct pitches.</p>
+<p>首先，我们调整乐器和声音以演奏和演唱正确的音高。</p>
+<p>Second, it’s the precise pitch of each note that we tune our instruments and voices to that makes up our tuning system.</p>
+<p>其次，我们调至的每个音符的精确音高构成了我们的调音系统。</p>
+<p>We use a system known as equal temperament to tune all our musical instruments in the west.</p>
+<p>在西方，我们使用十二平均律来为所有乐器调音。</p>
+<p>Whether you’re working with a keyboard, guitar, voice, MIDI sequencer, or any other instrument, you’re already experiencing this tuning system.</p>
+<p>无论是键盘、吉他、人声、MIDI 编曲器还是其他任何乐器，你都已体验到这个调音系统。</p>
+<p>Equal temperament divides the octave into twelve equal steps, known as semitones.</p>
+<p>十二平均律将八度分为十二个等份，称为半音。</p>
+<p>A semitone is the smallest space between notes in western music, and is a distance of one step.</p>
+<p>半音是西方音乐中音符之间的最小间隔，相当于一个音阶的距离。</p>
+<p>This mathematical averaging actually pushes our new musical notes slightly out of tune from where Mother Nature placed them and Pythagoras discovered them.</p>
+<p>这种数学平均实际上使我们的新音符稍微偏离了自然状态原本的位置。</p>
+<p>Just intonation is the original ‘pure’ tuning system that uses whole-number ratios, and works only from one fundamental note at a time.</p>
+<p>纯律是最初的“纯”调音系统，使用整数比例，一次只能从一个基音开始。</p>
+<p>This was fine for simple medieval music, but just intonation simply doesn’t cut it anymore, as nowadays we demand freedom to musically travel to any note, any chord, any time!</p>
+<p>它适用于简单的中世纪音乐，但如今的音乐需求已超越纯律，因为我们需要在任何时间自由地在任何音符和和弦之间转换！</p>
+<p>Advantage of equal temperament: We can play any chords, without having to retune.</p>
+<p>十二平均律的优点是：我们可以演奏任何和弦，无需重新调音。</p>
+<p>Disadvantage of equal temperament: Our music is a tiny bit out of tune.</p>
+<p>十二平均律的缺点是：我们的音乐稍微有些跑调。</p>
+<h2 id="chapter"><a class="header" href="#chapter">Chapter</a></h2>
+<p>All the music we listen to is out of tune!</p>
+<p>我们听的所有音乐都是跑调的！</p>
+<p>Seriously. I’m afraid that’s a scientific fact, which makes this subject another conversation starter, or stopper, depending on your company.</p>
+<p>这是真的。我怕这是个科学事实，这使得这个话题取决于你的听众，是个谈话的起点或终点。</p>
+<p>Don’t worry, this isn’t where music theory becomes conspiracy theory, and please don’t delete all your music in protest, as none of those songs would even exist unless they were all a little out of tune.</p>
+<p>别担心，这不是音乐理论变成阴谋论，也不要因抗议而删除所有音乐，因为如果没有一点跑调，那些歌曲根本不会存在。</p>
+<p>Let me explain – but first, what is tuning? Tuning means two things.</p>
+<p>让我解释一下 – 首先，什么是调音？调音有两层含义。</p>
+<p>First, we tune our instruments and voices in order to play and sing the correct pitches.</p>
+<p>首先，我们调好乐器和声音以演奏和唱出正确的音高。</p>
+<p>Second, it’s the precise pitch of each note that we tune our instruments and voices to that makes up our tuning system.</p>
+<p>其次，每个音符的精确音高构成了我们的调音系统。</p>
+<p>Our musical notes have been extracted from nature, and, more specifically, from the harmonic series.</p>
+<p>我们的音符是从自然界中提取出来的，更具体地说，是从谐波系列中提取出来的。</p>
+<p>Just like throwing a pebble into a pond causes ripples, whenever a note is sounded its vibrations also ripple out and set off a series of higher notes, which perform as backing vocalists and sing softly along.</p>
+<p>就像投石入池引起涟漪一样，当一个音符被发出时，它的振动也会激起一系列高音，这些高音就像背景歌手一样轻声伴唱。</p>
+<p>The harmonic series is the series of higher notes that are set off from the vibrations of a single note.</p>
+<p>谐波系列就是从单个音符的振动中激起的一系列高音。</p>
+<p>If you’ve ever heard overtone singers, like the Gyuto Monks of Tibet, then you’re already familiar with this phenomenon.</p>
+<p>如果你曾经听过泛音歌手，比如西藏的吉托僧侣，那么你已经熟悉这种现象了。</p>
+<p>We refer to all these quieter notes that occur in the harmonic series as overtones, and they make up the harmonic series.</p>
+<p>我们将谐波系列中所有这些较弱的音符统称为泛音，它们构成了谐波系列。</p>
+<p>If you want to get fancy, overtones’ wavelengths can be mathematically explained as whole-number ratios (e.g. 2:1) of the low fundamental note.</p>
+<p>如果你想更讲究一点，泛音的波长可以用数学方法解释为低音基音的比例（例如 2:1）。</p>
+<p>For example, if you pluck two strings of the same thickness and tension, where the second string is half the length of the first, for every single sound wave vibration of the long string, the short one vibrates twice, producing a note that’s an octave higher.</p>
+<p>例如，如果你拉两根同样粗细和张力的琴弦，其中第二根琴弦是第一根琴弦长度的一半，那么对于第一根长琴弦的每一次音波振动，短琴弦就会振动两次，发出高一个八度的音。</p>
+<p>This original ‘pure’ tuning system that uses whole-number ratios, and works only from one fundamental note at a time, is called just intonation.</p>
+<p>这种最初的“纯”调音系统使用整数比例，只能从一个基本音开始，被称为纯律。</p>
+<p>By the way, the amazingness of overtone singers is that they’ve learnt how to turn up their inner ‘backing vocalists,’ so you can hear the low, or fundamental, note they’re singing along with these higher rippled notes (overtones) as well.</p>
+<p>顺便说一句，泛音歌手的神奇之处在于他们学会了提高内心的“伴唱歌手”，这样你就能听到他们唱的低音，也就是基础音，与这些高音泛音一起。</p>
+<p>Harmony from one voice. Amazing!</p>
+<p>一个声音的和声。神奇！</p>
+<p>Until the late Renaissance, composers would mostly make simple music that stuck both to one fundamental pitch and to a few notes from its harmonic series, which the old just intonation tuning was perfect for.</p>
+<p>直到文艺复兴晚期，作曲家们大多创作简单音乐，只使用一个基本音和其谐波系列中的几个音，而旧的纯律调音正好适合这种需求。</p>
+<p>The majority of music was also vocal, another way to sidestep the hassle of constantly retuning instruments to different fundamentals.</p>
+<p>大多数音乐也是人声的，这是另一种避免不断调音到不同基本音的麻烦的方法。</p>
+<p>However, the tidal wave that 15th century British composer John Dunstaple had started with his complex music eventually swelled into a widespread demand for full creative liberation that just intonation couldn’t provide due to its fundamental limitations.</p>
+<p>然而，15 世纪英国作曲家约翰·邓斯泰布尔通过其复杂的音乐所引发的浪潮最终演变成了一种广泛的需求，即完全的创作自由，而纯律由于其根本的局限性无法提供这种自由。</p>
+<p>As composers became more interested in musical travel to any and all notes, the need for a tuning system that could provide this freedom became paramount.</p>
+<p>随着作曲家们越来越倾向于在任何和所有音符之间进行音乐旅行，他们迫切需要一种能够提供这种自由的音高系统。</p>
+<p>To put things into perspective, if they hadn’t solved this problem back then, we’d now be trying to find ways for technology to somehow retune our instruments between every chord change.</p>
+<p>为了更好地理解，如果他们当时没有解决这个问题，我们现在可能需要找到方法，让技术在每次和弦变化时重新调音我们的乐器。</p>
+<p>And, far worse than that, the vast majority of music that’s been born in the last few centuries would’ve been impossible to create.</p>
+<p>而更糟糕的是，在过去几个世纪中诞生的绝大多数音乐本是不可能创作出来的。</p>
+<p>For over a millennium, great minds in both Asia and Europe had been working on the idea of dividing the octave into twelve equal steps (equal temperament), which would sever those shackles to a fundamental pitch and permit the migration of music to any note without the need to retune your instrument.</p>
+<p>超过一个世纪以来，亚洲和欧洲的伟大思想家们一直在研究将八度分成十二个等步（十二平均律）的想法，这可以打破对基本音高的束缚，使音乐能够转移到任何音符，而无需重新调音。</p>
+<p>The turning point finally came in 1722, when the genius J.S. Bach (my hero!) mastered a way of tuning his keyboard so he could play anything, anywhere, anytime.</p>
+<p>最终的转折点出现在 1722 年，当时天才约翰·塞巴斯蒂安·巴赫（我的英雄!）掌握了一种调音键盘的方法，使他可以在任何地方、任何时间演奏任何音乐。</p>
+<p>He celebrated this historic achievement by writing a collection of compositions that did exactly that, titled The Well-Tempered Clavier.</p>
+<p>他通过创作一系列这样的作品来庆祝这一历史性的成就，这些作品被命名为《平均律钢琴曲集》。</p>
+<p>Although there were countless people who all worked tirelessly over the years to make this dream a reality, it was Bach’s music that took it to the world.</p>
+<p>尽管多年来有无数人辛勤工作，使这个梦想成为现实，但还是巴赫的音乐将这一成就带到了全世界。</p>
+<p>By the 1830s, most instruments were being manufactured using the new tuning system, and this invention of dividing the octave into twelve equal steps, known as semitones, has gone on to revolutionise music by allowing everyone from Beethoven to the Beatles (and yes, even Bieber) to play music using all of the notes without retuning.</p>
+<p>到 1830 年代，大多数乐器的制造已经采用了新的调音系统，这项将八度音分为十二个等分音（半音）的发明，已经彻底改变了音乐，使得从贝多芬到披头士（当然，甚至包括贾斯汀·比伯）都能使用所有音符演奏音乐，而无需重新调音。</p>
+<p>The downside to this averaging of our pitches is that some of them are now slightly out of tune to what nature intended, but I’m sure you’ll agree that the infinite upsides are more than worth it.</p>
+<p>这种平均音高的缺点是，其中一些音现在稍微偏离了自然的预期，但我相信你会同意，无限的好处远远超过了这一点。</p>
+<p>(The octave can, of course, be divided into any number of steps, like in the Arabic musical system where they halve western semitones into quartertones, resulting in twenty-four notes to an octave.</p>
+<p>当然，八度音也可以分成任何数量的音阶，比如阿拉伯音乐系统中将西方半音再分为四分音，一个八度有二十四个音符。</p>
+<p>If you haven’t heard music like this, do yourself a favour and listen to some, as it’s utterly mesmerizing and magical.)</p>
+<p>如果你还没有听过这样的音乐，不妨听一听，因为它真是令人着迷和神奇。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="notes_and_enharmonics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="major_scale.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="notes_and_enharmonics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="major_scale.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

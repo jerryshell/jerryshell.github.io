@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>GLOSSARY 术语表 - Hack Music Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Hack Music Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="glossary-术语表"><a class="header" href="#glossary-术语表">GLOSSARY 术语表</a></h1>
+<h2 id="chord-和弦"><a class="header" href="#chord-和弦">chord 和弦</a></h2>
+<p>three or more notes sounded together (e.g. C E G)
+三个或三个以上音符同时发声（例如 C E G）</p>
+<h2 id="chord-progression-和弦进行"><a class="header" href="#chord-progression-和弦进行">chord progression 和弦进行</a></h2>
+<p>sequence of chords (i.e. the chords you string together to tell your musical story)
+和弦的序列（即你用来讲述音乐故事的和弦）</p>
+<h2 id="chord-quality--quality-和弦性质--性质"><a class="header" href="#chord-quality--quality-和弦性质--性质">chord quality / quality 和弦性质 / 性质</a></h2>
+<p>whether a chord is major, minor, or diminished (e.g. Cmaj has a ‘major’ quality)
+指和弦是大调、小调还是减三和弦（例如 Cmaj 具有“大调”性质）</p>
+<h2 id="chord-symbol-和弦符号"><a class="header" href="#chord-symbol-和弦符号">chord symbol 和弦符号</a></h2>
+<p>quickest and easiest way to notate a chord, using root note and chord quality (e.g. Cmaj)
+记录和弦最快速简便的方法，使用根音与和弦性质（例如 Cmaj）</p>
+<h2 id="consonant--consonance-协和音程"><a class="header" href="#consonant--consonance-协和音程">consonant / consonance 协和音程</a></h2>
+<p>pleasing sound (e.g. perfect 5th)
+协和悦耳的音程（例如：纯五度）</p>
+<h2 id="devil-in-music--diabolus-in-musica-魔鬼音程"><a class="header" href="#devil-in-music--diabolus-in-musica-魔鬼音程">devil in music / diabolus in musica 魔鬼音程</a></h2>
+<p>old-fashioned name for the diminished 5th, probably coined by the Roman Catholic Church
+传统术语，指减五度，可能由罗马天主教会创造</p>
+<h2 id="dim--"><a class="header" href="#dim--">dim / °</a></h2>
+<p>abbreviation for diminished triad, used in chord symbols (e.g. Bdim / B°)
+减三和弦的缩写，用于和弦符号中（例如 Bdim / B°）</p>
+<h2 id="diminished-5th--tritone-spelling--5-减五度--三全音记作-5"><a class="header" href="#diminished-5th--tritone-spelling--5-减五度--三全音记作-5">diminished 5th / tritone (spelling = ♭5) 减五度 / 三全音（记作 ♭5）</a></h2>
+<p>dissonant interval of six semitones
+六个半音的不协和音程</p>
+<h2 id="diminished-triad-减三和弦"><a class="header" href="#diminished-triad-减三和弦">diminished triad 减三和弦</a></h2>
+<p>special type of minor triad, consisting of a minor 3rd (three semitones) and a diminished 5th (six semitones) above its root (e.g. B D F)
+一种特殊的小三和弦，由根音上方的小三度（三个半音）和减五度（六个半音）组成（例如 B D F）</p>
+<h2 id="dissonant--dissonance-不和谐音--不和谐音程"><a class="header" href="#dissonant--dissonance-不和谐音--不和谐音程">dissonant / dissonance 不和谐音 / 不和谐音程</a></h2>
+<p>clashing sound (e.g. diminished 5th)
+不和谐的声音（例如：减五度）</p>
+<h2 id="enharmonic-等音"><a class="header" href="#enharmonic-等音">enharmonic 等音</a></h2>
+<p>different name for the same note (e.g. C♯ and D♭)
+不同名称表示同一个音（例如 C♯ 和 D♭）</p>
+<h2 id="equal-temperament-十二平均律"><a class="header" href="#equal-temperament-十二平均律">equal temperament 十二平均律</a></h2>
+<p>tuning system that divides the octave into twelve equal steps (i.e. semitones)
+将八度划分为十二等分（即半音）的调音系统</p>
+<h2 id="flat---降号--"><a class="header" href="#flat---降号--">flat / ♭ 降号 / ♭</a></h2>
+<p>one semitone down (e.g. D♭ is one semitone down from D)
+降一个半音（例如 D♭ 比 D 低一个半音）</p>
+<h2 id="harmonic-series-泛音列"><a class="header" href="#harmonic-series-泛音列">harmonic series 泛音列</a></h2>
+<p>series of higher notes that are set off from the vibrations of a single note
+由单个音的振动产生的更高音的系列音符</p>
+<h2 id="harmony-和声"><a class="header" href="#harmony-和声">harmony 和声</a></h2>
+<p>two or more notes sounded together (i.e. vertical music)
+两个或多个音符同时发出的声音（即纵向音乐结构）</p>
+<h2 id="interval-音程"><a class="header" href="#interval-音程">interval 音程</a></h2>
+<p>space between any two notes, measured in semitones (e.g. twelve semitones is the interval of an octave)
+任意两个音符之间的间隔，以半音为单位测量（例如 十二个半音是一个八度）</p>
+<h2 id="just-intonation-纯律"><a class="header" href="#just-intonation-纯律">just intonation 纯律</a></h2>
+<p>original ‘pure’ tuning system that uses whole-number ratios, and works only from one fundamental note at a time
+原始的“纯”调音系统，使用整数比例，并且只能从一个基本音符开始</p>
+<h2 id="key-调性"><a class="header" href="#key-调性">key 调性</a></h2>
+<p>scale in use (e.g. a melody in the A minor scale is in the key of A minor)
+使用的音阶（例如，A 小调音阶中的旋律属于 A 小调）</p>
+<h2 id="key-note-主音"><a class="header" href="#key-note-主音">key-note 主音</a></h2>
+<p>root note of a scale or key (i.e. the scale’s first note)
+音阶或调式的根音（即音阶的第一个音）</p>
+<h2 id="key-signature-调号"><a class="header" href="#key-signature-调号">key signature 调号</a></h2>
+<p>sharps or flats in a scale (e.g. F♯ and C♯ in D major)
+音阶中的升号或降号（例如 D 大调中的 F♯ 和 C♯）</p>
+<h2 id="m"><a class="header" href="#m">m</a></h2>
+<p>abbreviation for minor triad, used in chord symbols (e.g. Am)
+小三和弦的缩写，用于和弦符号中（例如 Am）</p>
+<h2 id="maj"><a class="header" href="#maj">maj</a></h2>
+<p>abbreviation for major triad, used in chord symbols (e.g. Cmaj)
+大三和弦的缩写，用于和弦符号中（例如 Cmaj）</p>
+<h2 id="major-3rd-spelling--3-大三度记作-3"><a class="header" href="#major-3rd-spelling--3-大三度记作-3">major 3rd (spelling = 3) 大三度（记作 3）</a></h2>
+<p>interval of four semitones
+四个半音的音程</p>
+<h2 id="major-scale-大调音阶"><a class="header" href="#major-scale-大调音阶">major scale 大调音阶</a></h2>
+<p>‘happy scale’ made from this semitone formula: 2 2 1 2 2 2 1
+“快乐音阶”，由以下半音公式构成：2 2 1 2 2 2 1</p>
+<h2 id="major-triad-大三和弦"><a class="header" href="#major-triad-大三和弦">major triad 大三和弦</a></h2>
+<p>triad consisting of a major 3rd (four semitones) and a perfect 5th (seven semitones) above its root (e.g. C E G)
+由根音上方的大三度（四个半音）和纯五度（七个半音）构成的和弦（例如 C E G）</p>
+<h2 id="melody-旋律"><a class="header" href="#melody-旋律">melody 旋律</a></h2>
+<p>sequence of notes sounded one at a time (i.e. horizontal music)
+依次发声的音符序列（即横向音乐）</p>
+<h2 id="minor-3rd-spelling--3-小三度记作-3"><a class="header" href="#minor-3rd-spelling--3-小三度记作-3">minor 3rd (spelling = ♭3) 小三度（记作 ♭3）</a></h2>
+<p>interval of three semitones
+三个半音的音程</p>
+<h2 id="minor-scale--natural-minor-scale-小调--自然小调音阶"><a class="header" href="#minor-scale--natural-minor-scale-小调--自然小调音阶">minor scale / natural minor scale 小调 / 自然小调音阶</a></h2>
+<p>‘sad scale’ made from this semitone formula: 2 1 2 2 1 2 2
+“忧郁音阶”，由以下半音公式构成：2 1 2 2 1 2 2</p>
+<h1 id="minor-triad-小三和弦"><a class="header" href="#minor-triad-小三和弦">minor triad 小三和弦</a></h1>
+<p>triad consisting of a minor 3rd (three semitones) and a perfect 5th (seven semitones) above its root (e.g. A C E)
+由根音上方的小三度（三个半音）和纯五度（七个半音）构成的三和弦（例如 A C E）</p>
+<h2 id="naturals-自然音"><a class="header" href="#naturals-自然音">naturals 自然音</a></h2>
+<p>white notes on piano (i.e. not a sharp or flat)
+钢琴上的白键（即不带升号或降号）</p>
+<h2 id="natural-minor-scale--minor-scale-自然小调音阶--小调音阶"><a class="header" href="#natural-minor-scale--minor-scale-自然小调音阶--小调音阶">natural minor scale / minor scale 自然小调音阶 / 小调音阶</a></h2>
+<p>‘sad scale’ made from this semitone formula: 2 1 2 2 1 2 2
+“忧郁音阶”，由以下半音公式构成：2 1 2 2 1 2 2</p>
+<h2 id="note-音符"><a class="header" href="#note-音符">note 音符</a></h2>
+<p>frequency of vibrations, resulting in the highness or lowness of a sound, aka a pitch (e.g. C)
+振动的频率，导致声音的高低，即音高（例如 C）</p>
+<h2 id="octave--perfect-8th-spelling--8-八度--纯八度记作-8"><a class="header" href="#octave--perfect-8th-spelling--8-八度--纯八度记作-8">octave / perfect 8th (spelling = 8) 八度 / 纯八度（记作 8）</a></h2>
+<p>interval of twelve semitones (i.e. same note, but a higher or lower pitched version)
+十二个半音的音程（即同一个音符的更高或更低的版本）</p>
+<h2 id="overtones-泛音"><a class="header" href="#overtones-泛音">overtones 泛音</a></h2>
+<p>quieter notes that occur in the harmonic series
+出现在泛音列中的较弱音符</p>
+<h2 id="perfect-5th-spelling--5-纯五度记作-5"><a class="header" href="#perfect-5th-spelling--5-纯五度记作-5">perfect 5th (spelling = 5) 纯五度（记作 5）</a></h2>
+<p>interval of seven semitones
+七个半音的音程</p>
+<h2 id="perfect-8th--octave-spelling--8-纯八度--八度记作-8"><a class="header" href="#perfect-8th--octave-spelling--8-纯八度--八度记作-8">perfect 8th / octave (spelling = 8) 纯八度 / 八度（记作 8）</a></h2>
+<p>interval of twelve semitones (i.e. same note, but a higher or lower pitched version)
+十二个半音的音程（即同一个音符的更高或更低的版本）</p>
+<h2 id="pitch-音高"><a class="header" href="#pitch-音高">pitch 音高</a></h2>
+<p>frequency of vibrations, resulting in the highness or lowness of a sound, aka a note (e.g. C)
+振动的频率导致的声音的高低，即音符（例如 C）</p>
+<h2 id="relative-major-关系大调"><a class="header" href="#relative-major-关系大调">relative major 关系大调</a></h2>
+<p>the scale you get when you start on the 3rd note of a minor scale
+从小调音阶的第 3 个音符开始得到的音阶</p>
+<h2 id="relative-minor-关系小调"><a class="header" href="#relative-minor-关系小调">relative minor 关系小调</a></h2>
+<p>the scale you get when you start on the 6th note of a major scale
+从大调音阶的第 6 个音符开始得到的音阶</p>
+<h2 id="relatives--relative-scale-关系调--关系音阶"><a class="header" href="#relatives--relative-scale-关系调--关系音阶">relatives / relative scale 关系调 / 关系音阶</a></h2>
+<p>scales that have the same notes, but a different root (e.g. C major and A minor)
+拥有相同音符但根音不同的音阶（例如 C 大调和 A 小调）</p>
+<h2 id="rhythm-节奏"><a class="header" href="#rhythm-节奏">rhythm 节奏</a></h2>
+<p>pattern in time (e.g. ta ti-ti ta ta)
+在时间中的模式（例如 ta ti-ti ta ta）</p>
+<h2 id="root--root-note-根音"><a class="header" href="#root--root-note-根音">root / root note 根音</a></h2>
+<p>first note of a scale or chord (e.g. D is the root in D major)
+音阶或和弦的第一个音符（例如 D 大调中的 D 是根音）</p>
+<h2 id="root-triad-根音三和弦"><a class="header" href="#root-triad-根音三和弦">root triad 根音三和弦</a></h2>
+<p>triad built on the first note of a scale
+以音阶的根音为基础构建的三和弦</p>
+<h2 id="scale-音阶"><a class="header" href="#scale-音阶">scale 音阶</a></h2>
+<p>family of notes that work together
+相互之间配合的音符集合</p>
+<h2 id="semitone-半音"><a class="header" href="#semitone-半音">semitone 半音</a></h2>
+<p>smallest interval in western music and is an interval of one step (e.g. C to C♯)
+西方音乐中最小的音程间隔，是一个音阶度（例如：C 到 C♯）</p>
+<h2 id="sharp---升号"><a class="header" href="#sharp---升号">sharp / ♯ 升号</a></h2>
+<p>one semitone up (e.g. C♯ is one semitone up from C)
+升一个半音（例如 C♯ 比 C 高一个半音）</p>
+<h2 id="spelling-音程构成"><a class="header" href="#spelling-音程构成">spelling 音程构成</a></h2>
+<p>numerical way of writing music (e.g. major scale = 1 2 3 4 5 6 7 8)
+用数字表示音程构成的方法（例如：大调音阶 = 1 2 3 4 5 6 7 8）</p>
+<h2 id="step"><a class="header" href="#step">step</a></h2>
+<p>semitone (‘step’ is not a musical term, and is therefore ambiguous)
+非正式说法，实际指半音（semitone）</p>
+<h2 id="tempo-拍速"><a class="header" href="#tempo-拍速">tempo 拍速</a></h2>
+<p>speed at which music is played (e.g. 120 BPM or beats per minute)
+音乐演奏的速度（例如 120 BPM，即每分钟拍数）</p>
+<h2 id="third-note--3rd-三度音"><a class="header" href="#third-note--3rd-三度音">third note / 3rd 三度音</a></h2>
+<p>magic ingredient in music that gives chords and scales their happy or sad sound
+赋予和弦和音阶快乐或悲伤声音的魔力成分</p>
+<h2 id="tone--whole-tone-全音"><a class="header" href="#tone--whole-tone-全音">tone / whole tone 全音</a></h2>
+<p>interval of two semitones (e.g. C to D)
+两个半音的音程（例如：C 到 D）</p>
+<h2 id="tonic-主音"><a class="header" href="#tonic-主音">tonic 主音</a></h2>
+<p>first note of a scale (e.g. D is the tonic in D major)
+音阶中的第一个音符（例如 D 大调中的 D 是主音）</p>
+<h2 id="triad-三和弦"><a class="header" href="#triad-三和弦">triad 三和弦</a></h2>
+<p>simplest chord, consisting of only three notes (e.g. 1 3 5)
+最简单的和弦，仅由三个音符组成（例如 1 3 5）</p>
+<h2 id="tritone--diminished-5th-spelling--5-三全音--减五度记作-5"><a class="header" href="#tritone--diminished-5th-spelling--5-三全音--减五度记作-5">tritone / diminished 5th (spelling = ♭5) 三全音 / 减五度（记作 ♭5）</a></h2>
+<p>dissonant interval of six semitones
+六个半音的不协和音程</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="answers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="answers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

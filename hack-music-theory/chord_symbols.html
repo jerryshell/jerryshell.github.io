@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Chord Symbols 和弦符号 - Hack Music Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Hack Music Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="chord-symbols-和弦符号"><a class="header" href="#chord-symbols-和弦符号">Chord Symbols 和弦符号</a></h1>
+<h2 id="hack"><a class="header" href="#hack">Hack</a></h2>
+<p>Chord symbols are the quickest and easiest way to notate or document a chord, which ensures that you can remember it in the future.</p>
+<p>和弦符号是记谱或记录和弦最快速和简便的方法，这样你就能在未来记住它。</p>
+<p>Chord symbols consist of the root note (e.g. C) and chord quality (e.g. major).</p>
+<p>和弦符号由根音（例如 C）和和弦性质（例如大调）组成。</p>
+<p>The quality is then abbreviated to maj (for major), m (for minor), and dim or ° (for diminished).</p>
+<p>性质简写为 maj（大调）、m（小调）和 dim 或 °（减调）。</p>
+<p>Please note, it’s always taken for granted that chords are major unless otherwise stated, so a C major triad can be notated as just C – although Cmaj is clearer and therefore preferred.</p>
+<p>请注意，一般默认和弦为大调，除非另有说明。因此，C 大三和弦可以简单记作 C，尽管 Cmaj 更清晰，因此更推荐使用。</p>
+<div class="table-wrapper"><table><thead><tr><th>‘classical’ music<br/>‘古典’音乐的<br/>Spelling-based chord symbols<br/>基于拼写的和弦符号</th><th>‘popular’ music<br/>‘流行’音乐的&lt;br/Root-based chord symbols<br/>基于根音的和弦符号</th><th>Hybrid chord symbols<br/>混合和弦符号</th></tr></thead><tbody>
+<tr><td>I（大写表示大调和弦）</td><td>Cmaj (或) C</td><td>Imaj</td></tr>
+<tr><td>ii（小写表示小三和弦）</td><td>Dm</td><td>IIm</td></tr>
+<tr><td>iii</td><td>Em</td><td>IIIm</td></tr>
+<tr><td>IV</td><td>Fmaj (或) F</td><td>IVmaj</td></tr>
+<tr><td>V</td><td>Gmaj (或) G</td><td>Vmaj</td></tr>
+<tr><td>vi</td><td>Am</td><td>VIm</td></tr>
+<tr><td>vii°</td><td>Bdim (或) B°</td><td>VIIdim</td></tr>
+</tbody></table>
+</div>
+<p>Figure 13.1 The three different approaches to chord symbols, using the key of C major</p>
+<p>图 13.1 使用 C 大调的三种和弦符号表示方法</p>
+<div class="table-wrapper"><table><thead><tr><th>‘classical’ music<br/>‘古典’音乐的<br/>Spelling-based chord symbols<br/>基于拼写的和弦符号</th><th>‘popular’ music<br/>‘流行’音乐的&lt;br/Root-based chord symbols<br/>基于根音的和弦符号</th><th>Hybrid chord symbols<br/>混合和弦符号</th></tr></thead><tbody>
+<tr><td>i</td><td>Am</td><td>Im</td></tr>
+<tr><td>ii°</td><td>Bdim (或) B°</td><td>IIdim</td></tr>
+<tr><td>III</td><td>Cmaj (或) C</td><td>♭IIImaj</td></tr>
+<tr><td>iv</td><td>Dm</td><td>IVm</td></tr>
+<tr><td>v</td><td>Em</td><td>Vm</td></tr>
+<tr><td>VI</td><td>Fmaj (或) F</td><td>♭VImaj</td></tr>
+<tr><td>VII</td><td>Gmaj (或) G</td><td>♭VIImaj</td></tr>
+</tbody></table>
+</div>
+<p>Figure 13.2 The three different approaches to chord symbols, using the key of A minor</p>
+<p>图 13.2 使用 A 小调的三种和弦符号表示方法</p>
+<p>The compromise with using the extremely concise notation of chord symbols, is that they don’t tell us where the notes should be played, but only what the notes are.</p>
+<p>使用这种极简和弦符号的妥协在于，它们并没有告诉我们这些音符应在哪个位置演奏，而只是说明了哪些音符是需要的。</p>
+<p>The only way to notate with 100% accuracy is to use the old-school stave (or new-school MIDI), which we’ll cover later in the book series.</p>
+<p>完全准确地记谱的唯一方法是使用传统的五线谱（或新式的 MIDI），这将在本书系列的后续部分中介绍。</p>
+<p>However, you don’t actually need to know any notation at all in order to make music, as notation is merely a way of documenting what you’ve made.</p>
+<p>然而，你其实不需要懂任何记谱法就能创作音乐，因为记谱法只是记录你创作的作品的一种方式。</p>
+<h2 id="chapter"><a class="header" href="#chapter">Chapter</a></h2>
+<p>Remember back in 1992 when Prince (RIP) released that album with the symbol on the cover and it became known as the Love Symbol, and then he started being referred to as “The Artist Formerly Known as Prince”?</p>
+<p>还记得 1992 年，Prince（愿他安息）发行了一张封面有符号的专辑，这张专辑被称为 Love Symbol，然后他开始被称为“前艺术家 Prince”吗？</p>
+<p>Yeah, that was pretty cool, but I think you’ll find chord symbols to be even cooler.</p>
+<p>嗯，那确实很酷，但我认为你会发现和弦符号更酷。</p>
+<p>And no diss to the Prince, but chord symbols are also way more useful than love symbols.</p>
+<p>没有贬低 Prince 的意思，但和弦符号比 Love Symbol 更有用。</p>
+<p>I’m not going to lie though, we’re kind of in a chord symbol limbo right now, stuck between the old ‘classical’ and new ‘popular’ worlds, resulting in more variations than you can shake a drumstick at.</p>
+<p>但老实说，我们现在处于和弦符号的过渡期，夹在旧的“古典”和新的“流行”世界之间，导致许多变体。</p>
+<p>I’ll share with you these two different approaches, as any variation you come across will be based on one of these, or on both, like the new hybrid chord symbol that is being used by the London College of Music.</p>
+<p>我会与大家分享这两种不同的方法，因为你遇到的任何变体都将基于其中一种或两种，就像伦敦音乐学院使用的新型混合和弦符号。</p>
+<p>So, what are chord symbols? They’re the quickest and easiest way to notate or document chords, ensuring that you can remember them in the future.</p>
+<p>那么，什么是和弦符号？它们是记谱或记录和弦最快速和简便的方法，确保你能将来记住它们。</p>
+<p>Amazing, right?</p>
+<p>棒极了，对吧？</p>
+<p>Chord symbols are small yet potent doses of musical information, consisting of the root note (e.g. C) and the chord quality (e.g. major).</p>
+<p>和弦符号是小而强大的音乐信息袋，包括根音（例如 C）和和弦性质（例如大调）。</p>
+<p>The quality is then abbreviated to maj (for major), m (for minor), and dim or ° (for diminished).</p>
+<p>性质缩写为 maj（大调）、m（小调）和 dim 或 °（减调）。</p>
+<p>As if that’s not concise enough, it’s always taken for granted that chords are major unless otherwise stated, which means a C major triad can be notated as just C.</p>
+<p>如果这还不够简洁，一般默认和弦为大调，除非另有说明，这意味着 C 大三和弦可以简单记作 C。</p>
+<p>(Note: I reckon if you haven’t got time to write ‘maj’ then you don’t have time to read this book, so, dear reader, please write out ‘maj’ as it creates consistency and destroys confusion.)</p>
+<p>（注：我认为如果你没时间写“maj”，你也没时间读这本书，所以亲爱的读者，请写出“maj”，这样能保持一致性，消除混淆。）</p>
+<p>And that’s all there is to chord symbols – it really doesn’t get quicker or easier than that.</p>
+<p>这就是和弦符号的全部内容——没有比这更快速或简便的了。</p>
+<p>Now onto the ‘but’ – and you knew there had to be a big butt with something this good.</p>
+<p>好的，现在来说说“但是”——你知道，好事总会有个大转折。</p>
+<p>The compromise for using this concise method is that chord symbols don’t tell you where the notes should be played, but only what the notes are.</p>
+<p>使用这种简洁方法的妥协在于，和弦符号不会告诉你这些音符该在哪个位置演奏，只会告诉你这些音符是什么。</p>
+<p>For example, if someone is playing your song from chord symbols, it won’t sound exactly the same as how you composed it.</p>
+<p>例如，如果有人根据和弦符号来演奏你的歌曲，听起来不会和你创作的完全一样。</p>
+<p>It’ll sound close to your original as the chords will all be the same, but the notes will be in different positions.</p>
+<p>尽管和弦是一样的，但音符的位置会有所不同。</p>
+<p>The only way to notate with 100% accuracy is to use those old-school five lines (i.e. the stave).</p>
+<p>完全准确地记谱，唯一的方法是使用传统的五线谱。</p>
+<p>It’s actually really easy to learn and we’ll get to that later in the series, if you’re interested.</p>
+<p>学起来其实很简单，如果你有兴趣，我们会在系列教程的后面部分讲到。</p>
+<p>And if you don’t want to spend your time drawing little circles on little lines, hey, I totally understand.</p>
+<p>如果你不想花时间在小线上的小圈圈上画画，那我完全理解。</p>
+<p>The good news is that thanks to MIDI technology, those old-fashioned circles and lines are no longer necessary for composing or notating.</p>
+<p>好消息是，由于 MIDI 技术的发展，那些传统的圈圈和线头不再需要用于作曲或记谱了。</p>
+<p>Yay!</p>
+<p>耶！</p>
+<p>The table below demonstrates the three different approaches to chord symbols, using the key of C major:</p>
+<p>下表展示了三种不同的和弦符号方法，使用 C 大调作为示例：</p>
+<div class="table-wrapper"><table><thead><tr><th>‘classical’ music<br/>‘古典’音乐的<br/>Spelling-based chord symbols<br/>基于拼写的和弦符号</th><th>‘popular’ music<br/>‘流行’音乐的&lt;br/Root-based chord symbols<br/>基于根音的和弦符号</th><th>Hybrid chord symbols<br/>混合和弦符号</th></tr></thead><tbody>
+<tr><td>i</td><td>Am</td><td>Im</td></tr>
+<tr><td>ii°</td><td>Bdim (或) B°</td><td>IIdim</td></tr>
+<tr><td>III</td><td>Cmaj (或) C</td><td>♭IIImaj</td></tr>
+<tr><td>iv</td><td>Dm</td><td>IVm</td></tr>
+<tr><td>v</td><td>Em</td><td>Vm</td></tr>
+<tr><td>VI</td><td>Fmaj (或) F</td><td>♭VImaj</td></tr>
+<tr><td>VII</td><td>Gmaj (或) G</td><td>♭VIImaj</td></tr>
+</tbody></table>
+</div>
+<p>Pros of using spelling: Easy to move songs’ chords into other keys (good for accommodating a singer’s range).</p>
+<p>使用拼写的优势：容易将歌曲的和弦转换到其他调性（有利于适应歌手的音域）。</p>
+<p>Cons of using spelling: Hard to decipher Roman numerals and the associated key and chord qualities.</p>
+<p>使用拼写的缺点：难以辨认罗马数字及其相关的调性和和弦性质。</p>
+<p>Pros of using roots: Easy to see where and what the chords are, without needing to know the overall key.</p>
+<p>使用根音的优势：不需要知道整体调性就能清楚地看到和弦的位置和性质。</p>
+<p>Cons of using roots: Hard to move songs’ chords into other keys (bad for accommodating a singer’s range).</p>
+<p>使用根音的缺点：很难将歌曲的和弦转换到其他调性（不利于适应歌手的音域）。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="triads_in_minor_keys.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="goodbye.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="triads_in_minor_keys.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="goodbye.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

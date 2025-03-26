@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Difference Between Major &amp; Minor Triads 大三和弦与小三和弦的区别 - Hack Music Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Hack Music Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="大三和弦与小三和弦的区别"><a class="header" href="#大三和弦与小三和弦的区别">大三和弦与小三和弦的区别</a></h1>
+<h2 id="hack"><a class="header" href="#hack">Hack</a></h2>
+<p>Triads are the simplest chords, as they consist of only three notes.</p>
+<p>三和弦是最简单的和弦，因为它们只包含三个音符。</p>
+<p>Chords are built by playing a note in the scale, then skipping over the adjacent note to the right and playing the note above it, and then repeating this play-skip pattern until you have the desired chord.</p>
+<p>和弦是通过在音阶中演奏一个音符，然后跳过右边的相邻音符并演奏其上方的音符，再重复这个演奏-跳过的模式，直到你得到所需的和弦。</p>
+<p>The first triad in A major is A C♯ E (known as the A major triad), which sounds happy.</p>
+<p>A 大调的第一个三和弦是 A C♯ E（称为 A 大三和弦），听起来很快乐。</p>
+<p>The first triad in A minor is A C E (known as the A minor triad), which sounds sad.</p>
+<p>A 小调的第一个三和弦是 A C E（称为 A 小三和弦），听起来很悲伤。</p>
+<p><img src="figure_9_1.png" alt="Figure 9.1" /></p>
+<p>Figure 9.1 Comparison of A major triad to A minor triad</p>
+<p>图 9.1 A 大调三和弦与 A 小调三和弦的比较</p>
+<p>Only one note is different from the A major triad to the A minor triad, the 3rd, yet the emotions are opposite.</p>
+<p>从 A 大调三和弦到 A 小调三和弦只有一个音符不同——即第三级音符——但情感却截然相反。</p>
+<p>This reveals that the third note, or 3rd, is the magic ingredient in music that gives chords and scales their happy or sad sound.</p>
+<p>这表明第三音符，或者三音，是音乐中赋予和弦和音阶快乐或悲伤情感的关键成分。</p>
+<p>The 3rd in a minor triad is closer to the root (three semitones) and therefore less harmonious, causing a dissonant or clashing sound and emotion.</p>
+<p>小三和弦中的三音距离根音较近（三个半音），因此不太和谐，产生不协和或冲突的声音和情感。</p>
+<p>The 3rd in a major triad is further away from the root (four semitones) and therefore vibrates more harmoniously, causing a consonant or pleasing sound and emotion.</p>
+<p>大三和弦中的三音离根音更远（四个半音），因此振动更加和谐，产生协和或悦耳的声音和情感。</p>
+<p>The note that completes these triads is called the perfect 5th, due to its perfect mathematical ratio to the root.</p>
+<p>完成这些三和弦的音符称为纯五度，因为它与根音的数学比例完美。</p>
+<p>By the way, the same is true about the octave, which is why it’s also referred to as the perfect 8th.</p>
+<p>顺便说一句，八度也符合同样的比率，这也是它被称为纯八度的原因。</p>
+<h3 id="intervals-间隔"><a class="header" href="#intervals-间隔">INTERVALS 间隔</a></h3>
+<p>Minor 3rd (spelling = ♭3) three semitones</p>
+<p>小三度（记法 = ♭3）三个半音</p>
+<p>Major 3rd (spelling = 3) four semitones</p>
+<p>大三度（记法 = 3）四个半音</p>
+<p>Perfect 5th (spelling = 5) seven semitones</p>
+<p>纯五度（记法 = 5）七个半音</p>
+<p>Octave / perfect 8th (spelling = 8) twelve semitones</p>
+<p>八度 / 纯八度（记法 = 8）十二个半音</p>
+<h2 id="chapter"><a class="header" href="#chapter">Chapter</a></h2>
+<p>Okay, okay, I can hear your inner why-kid loud and clear: “I understand the difference between major and minor scales now, but why does the one make me feel happy and the other sad?”</p>
+<p>好吧，好吧，我能听到你内心的疑问：“我现在理解了大调和小调的区别，但为什么一个让我感到快乐，另一个却让我感到悲伤？”</p>
+<p>Amazing question, and one of the most fascinating musical topics ever.</p>
+<p>真是个了不起的问题，也是最令人着迷的音乐话题之一。</p>
+<p>Until recently we battled between the classic nature/nurture divide.</p>
+<p>直到最近，我们还在经典的先天/后天争论中挣扎。</p>
+<p>Cultural conditioning has certainly deepened this phenomenon.</p>
+<p>文化确实加深了这种现象。</p>
+<p>For example, every year when we celebrate being one year wiser, we sing “Happy Birthday” – which is in a major scale – thus reinforcing our association of major scales with happiness.</p>
+<p>例如，每当我们庆祝自己又长大一岁时，我们会唱“生日快乐”这首歌——它是大调音阶——从而强化了我们将大调音阶与快乐联想在一起的印象。</p>
+<p>However, in 2009 the isolated Mafa tribe of Cameroon and Nigeria, who’d never been exposed to any music outside of their rural community, were involved in a historic study to find out if they also felt major as happy and minor as sad. They did!</p>
+<p>然而，在 2009 年，生活在喀麦隆和尼日利亚农村社区中的孤立玛法部落参与了一项历史性研究，结果发现他们也觉得大调是快乐的，小调是悲伤的。事实确实如此！</p>
+<p>The Mafa people ended this debate by evidencing a non-cultural human response to music.</p>
+<p>玛法人通过实验证明了人类对音乐的非文化反应，从而结束了这场争论。</p>
+<p>This is due to the sound waves vibrating more harmoniously in majors than in minors, proving that we truly are all hardwired to feel music as a universal language – genres are merely dialects.</p>
+<p>这是因为音波在大调中比在小调中更和谐地振动，证明我们天生具备将音乐视为通用语言的能力——音乐风格只是方言。</p>
+<p>Let’s explore this starting with triads, the simplest chords we have.</p>
+<p>让我们从三和弦开始探索，这是我们最简单的和弦。</p>
+<p>These consist of only three notes.</p>
+<p>它们只包含三个音符。</p>
+<p>We build chords by playing a note from the scale, then leapfrogging a couple of times.</p>
+<p>我们通过在音阶中演奏一个音符，然后跳过几个音符来构建和弦。</p>
+<p>In other words, you play a note in the scale, then skip over the adjacent note to the right and play the note above it, repeating this play-skip pattern until you have the desired chord.</p>
+<p>换句话说，你在音阶中演奏一个音符，然后跳过右边相邻的音符并演奏它上面的音符，重复这个演奏-跳过模式，直到你得到所需的和弦。</p>
+<p>We can actually do this through the entire scale until we have all of its notes in our chord, resulting in jazz – oops, sorry!</p>
+<p>我们实际上可以这样做，直到整个音阶的所有音符都在我们的和弦中，结果是爵士乐——抱歉！</p>
+<p>I mean, resulting in a seven-note chord – but the most common type of chord in popular music is the three-note triad.</p>
+<p>我指的是，结果是一个七音和弦——但在流行音乐中最常见的和弦类型是三音三和弦。</p>
+<blockquote>
+<p>Oh come now, it was just a little joke. I’m a massive jazz fan, so don’t send me hate mail, mmmkay?
+哦，别在意，这只是一个小玩笑。我是个超级爵士乐迷，所以别发邮件骂我，好吗？</p>
+</blockquote>
+<p>When you assemble a triad from the root in A major, you end up with the notes A C♯ E, which is known, unsurprisingly, as the A major triad.</p>
+<p>当你从 A 大调的根音构建三和弦时，你会得到音符 A C♯ E，这毫不意外地被称为 A 大三和弦。</p>
+<p>When we do the same from the root in A minor, we get the notes A C E, known as the A minor triad.</p>
+<p>当我们从 A 小调的根音做同样的事情时，我们会得到音符 A C E，被称为 A 小三和弦。</p>
+<p>If you play these notes on a piano or bagpipes or whatever instrument you have handy, you’ll hear and feel very clearly that the A major triad is exuding happiness into the atmosphere, while the A minor triad gently weeps on our shoulders.</p>
+<p>如果你在钢琴、风笛或任何方便的乐器上演奏这些音符，你会非常清楚地听到并感受到，A 大调三和弦散发出快乐的气息，而 A 小三和弦则轻轻在我们肩头低语。</p>
+<p><img src="figure_9_1.png" alt="Figure 9.1" /></p>
+<p>What the hell kind of sorcery is at work here?</p>
+<p>这到底是什么魔法？</p>
+<p>Only one note is different from the A major triad to the A minor triad, yet the emotions are opposite.</p>
+<p>从 A 大调三和弦到 A 小调三和弦仅有一个音符不同，但情感却是完全相反的。</p>
+<p>This discovery you have just made is profound: the third note, or 3rd, is the magic ingredient in music that gives chords and scales their happy or sad sound.</p>
+<p>你刚才的发现非常深刻：第三音，或称 3rd，是在音乐中赋予和弦和音阶快乐或悲伤声音的关键成分。</p>
+<p>We could sit around all day drinking tea and chatting about the importance of the 3rd, and that still wouldn’t do justice to its utmost gravity.</p>
+<p>我们可以整天坐着喝茶，讨论 3rd 的重要性，但依然无法充分表达它的极端重要性。</p>
+<p>It is impossible to over-emphasise the powers of the happy 3 and the sad ♭3.</p>
+<p>快乐的 3 和悲伤的 ♭3 的力量不言自明。</p>
+<p>The interval of three semitones is known as the minor 3rd (spelling = ♭3), as it’s the 3rd note in the minor scale, and the interval of four semitones is the major 3rd (spelling = 3), because it’s the 3rd rung of the major scale ladder.</p>
+<p>三个半音的音程称为小三度（记法 = ♭3），因为它是小调音阶中的第三音，而四个半音的音程称为大三度（记法 = 3），因为它是大调音阶中的第三级。</p>
+<p>Finally, the note that completes the triad is known as the perfect 5th (spelling = 5), due to the perfect mathematical ratio (3:2) of its relationship to the root, which is seven semitones away.</p>
+<p>最后，完成三和弦的音符称为纯五度（记法 = 5），这是因为它与根音的关系具有完美的数学比例（3:2），相差七个半音。</p>
+<p>This means that for every three sound wave vibrations of the perfect 5th, the root vibrates twice.</p>
+<p>这意味着每当纯五度振动三次时，根音振动两次。</p>
+<p>By the way, the same is true about the octave, also known as the perfect 8th (spelling = 8), as its notes are twelve semitones apart and result in another perfect ratio (2:1).</p>
+<p>顺便说一句，八度也称为纯八度（记法 = 8），它的音符相差十二个半音，形成另一个完美比例（2:1）。</p>
+<p>Finally, why do majors sound happy and minors sad?</p>
+<p>最后，为什么大调听起来高兴，小调听起来悲伤？</p>
+<p>The root (A in the above example) is our foundation on which the chord is built, so we hear it as the most important note.</p>
+<p>根音（如上面的例子中的 A）是我们构建和弦的基础，所以我们认为它是最重要的音符。</p>
+<p>Minor chords, with the ♭3 (C above) being only three semitones above the root, stir dissonance within us from the clashing sound of closer note vibrations.</p>
+<p>小调和弦中的 ♭3（如上面的 C）仅比根音高三个半音，这种更贴近的音符振动产生的不和谐音调引起我们内心的不和谐。</p>
+<p>Major chords, with the 3 (C♯ above) that’s four semitones above the root, resonate with our inner consonance to create a pleasing sound, thanks to their more spacious note vibrations.</p>
+<p>大调和弦中的 3（如上面的 C♯）比根音高四个半音，由于音符振动更宽广，它们与我们内心的和谐共鸣，创造出悦耳的声音。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="difference_between_major_and_minor_scales.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="seven_triads.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="difference_between_major_and_minor_scales.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="seven_triads.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

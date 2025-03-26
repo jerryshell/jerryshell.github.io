@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Finding Relatives 寻找关系调 - Hack Music Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Hack Music Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="finding-relatives-寻找关系调"><a class="header" href="#finding-relatives-寻找关系调">Finding Relatives 寻找关系调</a></h1>
+<h2 id="hack"><a class="header" href="#hack">Hack</a></h2>
+<p>To find the relative minor, count three semitones down in pitch from the major scale root.</p>
+<p>要找到相关小调，从大调音阶的根音开始向下数三个半音。</p>
+<p>To find the relative major, count three semitones up in pitch from the minor scale root.</p>
+<p>要找到关系大调，从小调音阶的根音向上数三个半音。</p>
+<p>Remember, there is always a note (i.e. letter) skipped between the roots of relative scales, aka relative keys.</p>
+<p>请记住，关系音阶（即关系调）的根音之间总是跳过一个音符（即一个字母）。</p>
+<p><img src="figure_6_1.png" alt="Figure 6.1" /></p>
+<p>Figure 6.1 Shortcut to finding relative keys</p>
+<p>图 6.1 关系调的快捷查找方法</p>
+<div class="table-wrapper"><table><thead><tr><th>Majors to relative minors<br/>大调到关系小调<br/>(three semitones down)<br/>（下降三个半音）</th><th>Minors to relative majors<br/>小调到关系大调<br/>(three semitones up)<br/>（上升三个半音）</th></tr></thead><tbody>
+<tr><td>B major = G♯ minor</td><td>D minor = F major</td></tr>
+<tr><td>E♭ major = C minor</td><td>B♭ minor = D♭ major</td></tr>
+</tbody></table>
+</div>
+<p>Figure 6.2 Examples of relative keys</p>
+<p>图 6.2 关系调的示例</p>
+<h2 id="chapter"><a class="header" href="#chapter">Chapter</a></h2>
+<p>Have you seen the film Finding Nemo?</p>
+<p>你看过《海底总动员》这部电影吗？</p>
+<p>Yeah, finding relatives isn’t anything like that, but the fish are so cute, aren’t they?</p>
+<p>是的，寻找关系调可不像那电影，但鱼儿们真的很可爱，不是吗？</p>
+<p>Okay, back to work.</p>
+<p>好了，回到正题。</p>
+<p>If you’re in a major key and want to find its relative minor, play the same scale but start on the 6th note.</p>
+<p>如果你在大调里，想找到它的关系小调，就用同样的音阶，但是从第六个音开始。</p>
+<p>And, if you’re in a minor key and want to find its relative major, play the same scale but start on the 3rd note.</p>
+<p>如果你在小调里并且想找到它的关系大调，就用同样的音阶，但从第三个音符开始。</p>
+<p>This method is great, but there’s a much quicker way to find relatives, which will save you from having to first figure out the scale and only then count up.</p>
+<p>这种方法很好，但有一个更快的方法可以找到关系调，这样你就不用先找出音阶再数数了。</p>
+<p>You know from the previous chapter that C major and A minor are relatives.</p>
+<p>你知道在上一章中提到，C 大调和 A 小调是关系调。</p>
+<p>The roots C and A are three semitones apart, and we can use this as a shortcut to find any relative.</p>
+<p>C 和 A 的根音相差三个半音，我们可以用这个来快捷找到任何关系调。</p>
+<p>To find the relative minor, count three semitones down in pitch (e.g. C down to A).</p>
+<p>要找到关系小调，从音高下降三个半音（例如 C 到 A）。</p>
+<p>To find the relative major, count three semitones up in pitch (e.g. A up to C).</p>
+<p>要找到关系大调，从音高上升三个半音（例如 A 到 C）。</p>
+<p>The way I remember which direction to move is by thinking of the literal meanings of major as important and minor as less important.</p>
+<p>我记住该往哪个方向数的方法是，根据“major”（大调/重要的）和“minor”（小调/不那么重要的）这两个词的字面意思。</p>
+<p>By these definitions, majors are above minors, so you would count down from a major to a minor, and up from a minor to a major.</p>
+<p>根据这些定义，大调高于小调，所以你会从大调向下降到小调，从小调向上升到大调。</p>
+<p>Let’s practice this shortcut with an example.</p>
+<p>让我们用一个例子来练习这个技巧。</p>
+<p>If we’re in the key of E major, what is the relative minor?</p>
+<p>如果我们处于 E 大调，那么它的关系小调是什么？</p>
+<p>Take a minute to work it out, by counting three semitones down from E.</p>
+<p>花一分钟时间算一算，从 E 开始数三个半音。</p>
+<p>Did you get D♭ minor?</p>
+<p>你得到的是 D♭ 小调吗？</p>
+<p>If you did, congrats, you landed on the right note.</p>
+<p>如果是，恭喜你，找到了正确的音符。</p>
+<p>But, as we can see from the original C major and A minor relatives, there is a note (i.e. letter) skipped – B – between their roots.</p>
+<p>但是，从最初的 C 大调和 A 小调的关系来看，它们的根音之间跳过了一个音符（即字母 B）。</p>
+<p>Therefore, D♭ minor can’t be the relative of E major, as their roots are adjacent letters.</p>
+<p>因此，D♭ 小调不能是 E 大调的关系调，因为它们的根音是相邻的字母。</p>
+<p>Having said that, though, we’re certain about the D♭ as it’s definitely three semitones down from E.</p>
+<p>不过，可以肯定的是，D♭ 确实是从 E 开始往下降的三个半音。</p>
+<p>This means we’ve got the correct note but the incorrect name for it.</p>
+<p>这意味着我们得到了正确的音符，但名字不对。</p>
+<p>There’s an easy solution to this problem that often arises.</p>
+<p>这个常见问题有一个简单的解决方法。</p>
+<p>Whenever we know for sure that we’re on the right note, but its name is wrong, we call on our enharmonic friends.</p>
+<p>每当我们确定自己得到了正确的音符，但名称不对时，我们可以求助于等音。</p>
+<p>What’s the enharmonic equivalent (other name) for D♭?
+D♭ 的等音（另一名称）是什么？</p>
+<p>Yep, C♯.</p>
+<p>对，是 C♯。</p>
+<p>That means C♯ minor is the relative of E major.</p>
+<p>这意味着 C♯ 小调是 E 大调的关系调。</p>
+<p>We haven’t even worked out the E major scale yet, but we already know its relative.</p>
+<p>我们甚至还没计算出 E 大调音阶，就已经知道了它的关系调。</p>
+<p>That’s a good shortcut! Here are a few more examples to test out your new trick:</p>
+<p>这是一个很好的捷径！这里有一些例子让你测试新技巧：</p>
+<div class="table-wrapper"><table><thead><tr><th>Majors to relative minors<br/>大调到关系小调<br/>(three semitones down)<br/>（下降三个半音）</th><th>Minors to relative majors<br/>小调到关系大调<br/>(three semitones up)<br/>（上升三个半音）</th></tr></thead><tbody>
+<tr><td>B major = G♯ minor</td><td>D minor = F major</td></tr>
+<tr><td>E♭ major = C minor</td><td>B♭ minor = D♭ major</td></tr>
+</tbody></table>
+</div>
+<p>Remember, in order to properly switch into the relative, you need to emphasise the new root, otherwise it’ll sound like you’re still in the same key.</p>
+<p>请记住，为了正确地转换到关系调，你需要强调新的根音，否则听起来会像还在同一个调性中。</p>
+<p>If I’m playing in D minor and want to change to F major in order to lighten the emotion of my song, it won’t happen unless I actively make F sound more important than D.</p>
+<p>如果我正在 D 小调中演奏，并且想切换到 F 大调以使歌曲的情感更轻快，除非我主动让 F 音变得比 D 音更重要，否则是不可能实现的。</p>
+<p>There are numerous ways we can make a note sound prominent, like starting or finishing the melody on it, or playing it longer or louder than the other notes.</p>
+<p>有很多方法可以让一个音显得出众，比如用它开始或结束旋律，或者演奏得比其他音符更长或更响。</p>
+<p>In this D minor song, the instant our ears are drawn to F as the new home, we’ve switched into the relative major and our mood will lift.</p>
+<p>在这首 D 小调的歌曲中，当我们的耳朵被 F 吸引为新的主音时，我们就切换到了关系大调中，我们的情绪也会得到提升。</p>
+<p>Easy peasy.</p>
+<p>简单轻松。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="minor_scale_and_relatives.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="why_flats_exist.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="minor_scale_and_relatives.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="why_flats_exist.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

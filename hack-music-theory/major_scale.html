@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Major Scale 大调 - Hack Music Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Hack Music Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="major-scale-大调"><a class="header" href="#major-scale-大调">Major Scale 大调</a></h1>
+<h2 id="hack"><a class="header" href="#hack">Hack</a></h2>
+<p>A scale is a family of notes that work together.</p>
+<p>音阶是一组能够和谐共存的音符。</p>
+<p>The original family is the major scale, often referred to as the ‘happy scale’ due to its cheerful sound.</p>
+<p>最基础的音阶是大调音阶，通常被称为“快乐音阶”，因为它的声音听起来很愉快。</p>
+<p>All major scales are exactly the same scale, made up from exactly the same formula but starting on a different note.</p>
+<p>所有大调音阶都遵循相同的模式，只是从不同的音符开始。</p>
+<p>This formula is derived from playing all the white notes on a piano, beginning with C.</p>
+<p>这个模式是从钢琴上弹奏所有的白键得出的，从 C 音开始。</p>
+<p>Therefore, the major scale formula (counted in steps, aka semitones) is: 2 2 1 2 2 2 1</p>
+<p>因此，大调音阶的公式（以步数计算，即半音）是：2 2 1 2 2 2 1</p>
+<p><img src="figure_4_1.png" alt="Figure 4.1" /></p>
+<p>Figure 4.1 Major scale formula derived from white notes on a piano, starting on C</p>
+<p>图 4.1 大调音阶公式，从钢琴白键的 C 音开始得出</p>
+<p><img src="figure_4_2.png" alt="Figure 4.2" /></p>
+<p>Figure 4.2 To find the D major scale, start the major scale formula on D</p>
+<p>图 4.2 要找到 D 大调音阶，以 D 为起始音应用大调音阶公式</p>
+<p>When writing out music, each note is assigned the number of its degree in the scale, from 1 to 7.</p>
+<p>在音乐记谱中，每个音符都会被赋予其在音阶中的度数，从 1 到 7。</p>
+<p>We then use 8 to complete the scale and represent a version of the root an octave higher.</p>
+<p>然后我们用 8 来完成音阶，表示比根音高一个八度的音符。</p>
+<p>This is called spelling, and is the numerical way of writing music (e.g. major scale = 1 2 3 4 5 6 7 8).</p>
+<p>这被称为拼谱法，是用数字记谱的方法（例如，大调音阶=1 2 3 4 5 6 7 8）。</p>
+<h3 id="vocab-extras-词汇补充"><a class="header" href="#vocab-extras-词汇补充">VOCAB EXTRAS 词汇补充</a></h3>
+<p>Root / root note / tonic: first note of a scale (e.g. D is the root in D major)</p>
+<p>根音 / 根音符 / 主音：音阶的第一个音符（例如 D 大调中的 D 是根音）</p>
+<p>Interval: space between any two notes, measured in semitones (e.g. twelve semitones is the interval of an octave)</p>
+<p>音程：两个音符之间的距离，以半音为单位（例如，十二个半音是一个八度音程）</p>
+<p>Semitone: smallest interval in western music and is an interval of one step (e.g. C to C♯)</p>
+<p>半音：西方音乐中最小的音程，是一个音阶的音程（例如 C 到 C♯）</p>
+<p>Tone / whole tone: interval of two semitones (e.g. C to D)</p>
+<p>全音：两个半音的音程（例如 C 到 D）</p>
+<h2 id="chapter"><a class="header" href="#chapter">Chapter</a></h2>
+<p>As much as we love playing with notes, that’s how much Pythagoras loved playing with numbers back in the good ol’ BCE days.</p>
+<p>尽管我们喜欢玩音符，但在公元前的美好时光里，毕达哥拉斯同样热衷于玩弄数字。</p>
+<p>The Greek overachiever discovered that repeating a 3:2 frequency ratio (the next simplest after that ultra-pure 2:1 octave ratio) produced a pleasant sounding set of notes that he could make melodies from.</p>
+<p>这位希腊成就非凡的人发现，重复 3:2 的频率比（在超纯的 2:1 八度比之后的下一个最简单的比率）能产生一组悦耳的音符，他可以用这些音符来创作旋律。</p>
+<p>This is further proof that music at its core is simple.</p>
+<p>这进一步证明了音乐在本质上是简单的。</p>
+<p>The special notes are: C D E F G A B C.</p>
+<p>这些特殊的音符是：C D E F G A B C。</p>
+<p>This would later become known as the major scale, or ‘happy scale’ due to its cheerful sound.</p>
+<p>这后来被称为大调音阶，或因其欢快的声音而被称为“快乐音阶”。</p>
+<p>Those notes probably look familiar too, as they’re all the piano’s white notes.</p>
+<p>这些音符可能看起来也很熟悉，因为它们都是钢琴上的白键。</p>
+<p>Thanks to equal temperament tuning, we no longer need to calculate our scales using ratios.</p>
+<p>由于十二平均律调音法，我们不再需要使用比率来计算我们的音阶。</p>
+<p>We simply use steps, aka semitones.</p>
+<p>我们只需要使用步骤，即半音。</p>
+<p>As the piano keyboard is designed around C major, let’s start there.</p>
+<p>由于钢琴键盘是以 C 大调为基础设计的，我们就从这里开始。</p>
+<p>By analysing the semitones between the white notes, we’ll discover the underlying formula for all major scales.</p>
+<p>通过分析白键之间的半音，我们将发现所有大调音阶的基本公式。</p>
+<p>There are two steps (semitones) from C to D, as there’s a black note in between, and there is one step (semitone) from E to F, and so on.</p>
+<p>从 C 到 D 有两个半音，因为中间有一个黑键，从 E 到 F 有一个半音，依此类推。</p>
+<p>Here is the complete major scale formula: 2 2 1 2 2 2 1</p>
+<p>这是完整的大调音阶公式：2 2 1 2 2 2 1</p>
+<p><img src="figure_4_1.png" alt="Figure 4.1" /></p>
+<p>Now we can take this semitone sequence and start anywhere we want, like on D, for a D major scale:</p>
+<p>现在我们可以用这个半音序列，从我们想要的任何地方开始，比如从 D 开始，得到 D 大调音阶：</p>
+<p><img src="figure_4_2.png" alt="Figure 4.2" /></p>
+<p>Finally, here’s some more terminology to further impress your friends with.</p>
+<p>最后，这里还有一些术语，可以让你进一步给朋友留下深刻印象。</p>
+<p>The first note of a scale is called its root or root note, or sometimes, tonic.</p>
+<p>音阶的第一个音符称为根音或根音符，有时也被称为主音。</p>
+<p>An interval is the space between any two notes, measured in semitones (e.g. twelve semitones is the interval of an octave).</p>
+<p>音程是指任意两个音符之间的距离，以半音为单位测量（例如，十二个半音是一个八度音程）。</p>
+<p>The interval of one step is a semitone, and the interval of two semitones can be called a tone, or whole tone.</p>
+<p>一步的音程是一个半音，两步的音程可以称为一个全音或大音程。</p>
+<p>The spelling of a scale or chord is the numerical way of writing it.</p>
+<p>音阶或和弦的拼写是用数字来表示它的方法。</p>
+<p>Each note is assigned the number of its degree in the scale, from 1 to 7.</p>
+<p>每个音符被分配其在音阶中的度数，从 1 到 7。</p>
+<p>We then use 8 to complete the scale and represent a version of the root an octave higher.</p>
+<p>然后我们使用 8 来完成音阶，并表示根音的一个八度更高的版本。</p>
+<p>The 1 and 8 are, of course, the same note, so technically a major scale only has seven different notes.</p>
+<p>当然，1 和 8 是相同的音符，所以技术上讲，大调音阶只有七个不同的音符。</p>
+<p>Using numbers to represent the notes of a scale allows us to detach melodies and chords from specific pitches, revealing their underlying contours and shapes.</p>
+<p>使用数字来表示音阶中的音符，可以使旋律和和弦脱离特定的音高，揭示它们的基本轮廓和形状。</p>
+<p>This is one of the most vital concepts in understanding and composing music, as it gives you insight into your own preferences for certain musical patterns.</p>
+<p>这是理解音乐与作曲的关键概念之一，因为它能让你洞察自己对某些音乐模式的偏好。</p>
+<p>And as a bonus, spelling music also enables you to move songs up or down in pitch, to better suit a singer’s range.</p>
+<p>另外，音符的记谱法还可以让你将歌曲的音高上下调整，以更好地适应歌手的音域。</p>
+<p>For example, if your melody started with the 1 followed by the 3, in C major, but you found that it was too low for your voice, you could move it up to D major and sing its 1 and 3 instead.</p>
+<p>例如，如果你的旋律以 1 开始，接着是 3，在 C 大调中，但你发现太低了，那你可以把它移到 D 大调，并唱 D 大调的 1 和 3。</p>
+<p>The melodic contour and resulting emotion will be identical.</p>
+<p>旋律线条和最终的情感将保持不变。</p>
+<p>However, if you referred to the notes in our C major melody as C and E (instead of 1 and 3), then you can’t move them directly into D major.</p>
+<p>然而，如果你将 C 大调旋律中的音符称为 C 和 E（而不是 1 和 3），那么你就不能直接将它们移到 D 大调。</p>
+<p>You’d first have to work out what degrees C and E are in C major, then take those numbers over to D major and work out the new notes.</p>
+<p>你得先搞清楚 C 和 E 在 C 大调中的音级，接着用这些数字去找出 D 大调中的相应音符。</p>
+<p>Numbers simplify music to the point of having only a single major scale.</p>
+<p>数字将音乐简化到只有一个大调音阶。</p>
+<p>Rather than learning twelve different major scales – one for each note – we learn only one and apply its formula to whatever note we want to start from.</p>
+<p>我们不需要学习十二种不同的大调音阶（每个音一个），而是只学一种，并将其公式应用于我们想要开始的任意音符。</p>
+<p>So the next time you’re walking down the street and someone asks you to spell a major scale, reply with 1 2 3 4 5 6 7 8 – and then run away as fast as you can, cos what kind of weirdo goes up to strangers and asks them to spell things?!</p>
+<p>所以，下次如果你走在街上，有人让你拼出大调音阶，你就回答 1 2 3 4 5 6 7 8，然后赶紧跑，因为只有怪人才会找陌生人让他们拼音阶吧？！</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="tuning.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="minor_scale_and_relatives.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="tuning.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="minor_scale_and_relatives.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

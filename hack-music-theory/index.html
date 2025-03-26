@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>HOW TO USE THIS BOOK 如何使用这本书 - Hack Music Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Hack Music Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="how-to-use-this-book-如何使用这本书"><a class="header" href="#how-to-use-this-book-如何使用这本书">HOW TO USE THIS BOOK 如何使用这本书</a></h1>
+<h2 id="wanna-learn-music-theory-in-30-minutes-想在-30-分钟内学习音乐理论吗"><a class="header" href="#wanna-learn-music-theory-in-30-minutes-想在-30-分钟内学习音乐理论吗">Wanna learn Music Theory in 30 minutes? 想在 30 分钟内学习音乐理论吗？</a></h2>
+<p>No prob!</p>
+<p>没问题！</p>
+<p>Each chapter is preceded by a hack (i.e. a cheat sheet) that delivers all the vital info you need to know about that topic.</p>
+<p>每个 Chapter 前面都有一个 Hack（即速查表），提供你需要知道的所有关键信息。</p>
+<p>Read through all the hacks in 30 minutes or less, ignoring the full chapters, and you’re good to go.</p>
+<p>在 30 分钟或更短时间内阅读所有 Hack，忽略完整 Chapter，你就可以开始了。</p>
+<p>You’ll miss out on a bunch of bad jokes and deep insights, but you’ll be making good music in less than an hour from now.</p>
+<p>你会错过一些冷笑话和深刻的见解，但不到一小时后，你就能开始创作美妙的音乐了。</p>
+<p>Oh yeah, one more thing. To keep you skipping merrily along, I’ve added a handy glossary for quick reference.</p>
+<p>哦，对了，还有一件事。为了让你愉快地继续，我添加了一个方便的词汇表供快速参考。</p>
+<p>All terms in bold have their definitions waiting patiently for you in the back.</p>
+<p>所有加粗的术语，其定义都在书后耐心等待你去查阅。</p>
+<p>And it goes without saying, which is silly cos now I’m gonna say it, but the debut of a term will always have its explanation with it.</p>
+<p>不用说也知道，虽然现在我要说了，但新术语的首次出现总是伴随着解释。</p>
+<p>However, later in the book if you come across a term you know was mentioned earlier but now looks Greek, please use the glossary.</p>
+<p>然而，如果你在书中稍后遇到之前提到但现在看起来像希腊文的术语，请使用词汇表。</p>
+<p>Unless it’s Pythagoras, he looks Greek cos he is Greek.</p>
+<p>除非是毕达哥拉斯，他看起来像希腊人因为他确实是希腊人。</p>
+<p>Wanna learn more about why and how music works?</p>
+<p>想了解更多关于音乐为什么和如何工作的知识吗？</p>
+<p>Great! Read this book cover to cover, then use the hacks as references afterwards.</p>
+<p>太好了！从头到尾读完这本书，然后将这些 Hack 作为参考使用。</p>
+<h2 id="important-tips-重要提示"><a class="header" href="#important-tips-重要提示">Important tips 重要提示</a></h2>
+<p>Music is sound and hearing is believing, so try playing the examples in this book on a piano app, a virtual piano online, or a real piano if you’re old-school.</p>
+<p>音乐是声音，听觉即相信，所以试着在钢琴应用、在线虚拟钢琴或老派的实体钢琴上演奏本书中的示例。</p>
+<p>Doing this or not doing this won’t affect your understanding of the content, but hearing it all come to life sure is fun.</p>
+<p>这样做与否都不会影响你对内容的理解，但听到这一切生动呈现确实很有趣。</p>
+<p>Also, you definitely don’t need to read this book in one sitting, though you easily could.</p>
+<p>另外，你完全不必一口气读完这本书，尽管你也可以这样做。</p>
+<p>Please remember, however, that understanding music theory is an accumulative action, so you’ll probably have questions at the end of each chapter that will be answered in subsequent chapters.</p>
+<p>请记住，理解音乐理论是一个累积的过程，所以你可能会在每个 Chapter 结束时有疑问，这些问题将在后续 Chapter 中得到解答。</p>
+<p>And, just like in a murder mystery where you have to get to the end before the whole picture becomes clear, our music theory story is still unfolding, too. All shall be revealed soon, so keep reading!</p>
+<p>就像在侦探小说中一样，你必须读到最后才能看清全貌，我们的音乐理论故事也在继续发展中。一切很快就会揭晓，所以请继续阅读！</p>
+<p>Lastly, you’ll get the best results from reading this book cover to cover, and then repeating that until it’s all soaked in.</p>
+<p>最后，你会从从头到尾完整阅读这本书中获得最佳效果，然后反复阅读直到完全理解。</p>
+<p>I’ve been told that using the book as a pillow while you’re sleeping also helps this osmosis.</p>
+<p>据说在睡觉时把书当作枕头也有助于这种潜移默化。</p>
+<p>(Disclaimer: please don’t sue me if you sleep on your e-reader and the screen cracks.)</p>
+<p>（免责声明：如果你把电子书阅读器放在枕头上睡觉而屏幕裂了，请不要起诉我。）</p>
+<p>P.S. If there's a blank space here ♯ ♭ instead of two musical symbols that kinda look like a hash sign and a lower-case b, then your e-reader's current font doesn't like musical symbols.</p>
+<p>P.S. 如果这里有一个空白空间而不是 ♯ 和 ♭ 这两个音乐符号，看起来像井号和一个小写 b，那么可能是你的电子阅读器的当前字体不支持音乐符号。</p>
+<p>Boo! Not to worry though, just change fonts and refresh your page until you see these symbols miraculously appear out of thin air.</p>
+<p>别担心，只需更改字体并刷新页面，直到这些符号神奇地出现。</p>
+<p>However, if they're still not showing up, then please download the PDF version of this book from HackMusicTheory.com</p>
+<p>但是，如果它们仍然没有显示出来，请从 HackMusicTheory.com 下载这本书的 PDF 版本。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+                            <a rel="next prefetch" href="pitch_and_rhythm.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+                    <a rel="next prefetch" href="pitch_and_rhythm.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
