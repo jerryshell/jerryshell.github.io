@@ -168,61 +168,59 @@
                     <main>
                         <h1 id="编程与程序员的知识"><a class="header" href="#编程与程序员的知识">编程与程序员的知识</a></h1>
 <p>I shall use the word programming to denote the whole activity of design and implementation of programmed solutions.</p>
-<p>我将使用“编程”一词来指代设计和实现程序化解决方案的全部活动。</p>
+<p>我会用"编程"这个词，指代设计并实现程序解决方案的完整过程。</p>
 <p>What I am concerned with is the activity of matching some significant part and aspect of an activity in the real world to the formal symbol manipulation that can be done by a program running on a computer.</p>
-<p>我关注的是将现实世界中某一重要部分和方面与计算机上运行的程序所能进行的正式符号操作相匹配的活动。</p>
+<p>我关注的是：如何把现实世界活动的关键部分，转化为计算机程序能够处理的符号操作。</p>
 <p>With such a notion it follows directly that the programming activity I am talking about must include the development in time corresponding to the changes taking place in the real world activity being matched by the program execution, in other words program modifications.</p>
-<p>基于此概念，我所讨论的编程活动必然包含与现实世界活动中所发生变化相对应的程序执行过程中的时间发展，换言之即程序修改。</p>
+<p>由此，编程活动必须包含持续调整：当现实世界活动变化时，程序也必须随之修改。</p>
 <p>One way of stating the main point I want to make is that programming in this sense primarily must be the programmers’ building up knowledge of a certain kind, knowledge taken to be basically the programmers’ immediate possession, any documentation being an auxiliary, secondary product.</p>
-<p>我想要阐明的核心观点之一是：在此意义上，编程本质上是程序员构建某种特定知识的过程，这种知识被视为程序员的直接掌握，而任何文档仅是辅助的次要产物。</p>
+<p>我想要阐明的核心观点之一是：编程的本质必须是程序员的知识积累，这些知识必须是程序员直接掌握的，所有文档都只是辅助的次要产物。</p>
 <p>As a background of the further elaboration of this view given in the following sections, the remainder of the present section will describe some real experience of dealing with large programs that has seemed to me more and more significant as I have pondered over the problems.</p>
-<p>作为对本节后续部分进一步阐述这一观点的背景，本节剩余部分将描述一些处理大型程序的实际经验，这些经验在我思考相关问题时显得越来越重要。</p>
+<p>为后面几节详细阐述该观点作铺垫，本节剩余内容将描述我处理大型程序的实际经历，随着对这些问题的深入思考，这些经历显得愈发重要。</p>
 <p>In either case the experience is my own or has been communicated to me by persons having first hand contact with the activity in question.</p>
-<p>无论哪种情况，这些经验都是我自己的，或是由与相关活动有直接接触的人士向我传达的。</p>
+<p>这些经验要么来自我的亲身经历，要么来自直接参与相关活动的一线人员反馈。</p>
 <p>Case 1 concerns a compiler.</p>
 <p>案例 1 涉及一个编译器。</p>
 <p>It has been developed by a group A for a Language L and worked very well on computer X.</p>
 <p>该编译器由 A 团队为语言 L 开发，并在计算机 X 上运行良好。</p>
 <p>Now another group B has the task to write a compiler for a language L + M, a modest extension of L, for computer Y.</p>
-<p>现在，另一团队 B 需要为语言 L + M（L 的 modest 扩展）开发编译器，用于计算机 Y。</p>
+<p>另一个团队 B 接到任务，要为计算机 Y 开发新编译器，新语言是 L 的小幅扩展版 L + M。</p>
 <p>Group B decides that the compiler for L developed by group A will be a good starting point for their design, and get a contract with group A that they will get support in the form of full documentation, including annotated program texts and much additional written design discussion, and also personal advice.</p>
-<p>团队 B 决定将团队 A 开发的 L 语言编译器作为其设计的基础，并与团队 A 签订合同，约定将获得全面的文档支持，包括带注释的程序文本和大量额外的书面设计讨论，以及个人建议。</p>
+<p>B 团队认为 A 团队开发的 L 语言编译器是理想起点，于是与 A 团队签约获得全套支持：包括带注释的源码、大量设计文档及人工指导。</p>
 <p>The arrangement was effective and group B managed to develop the compiler they wanted.</p>
-<p>该安排行之有效，B 团队成功开发出了他们想要的编译器。</p>
+<p>这项合作方案高效落实，最终 B 团队如愿研制出了他们想要的编译器。</p>
 <p>In the present context the significant issue is the importance of the personal advice from group A in the matters that concerned how to implement the extensions M to the language.</p>
-<p>在当前语境下，关键问题在于 A 团队在如何实现语言扩展 M 方面提供的个人建议的重要性。</p>
+<p>在本案例中，最关键的事实是：当团队 B 为语言 L 添加 M 扩展功能时，来自团队 A 的真人指导起到了决定性作用。</p>
 <p>During the design phase group B made suggestions for the manner in which the extensions should be accommodated and submitted them to group A for review.</p>
-<p>在设计阶段，B 团队提出了关于如何实现扩展的建议，并提交给 A 组进行审查。</p>
+<p>在设计阶段，B 团队就扩展功能的实现方案提出建议，并提交给 A 团队审核。</p>
 <p>In several major cases it turned out that the solutions suggested by group B were found by group A to make no use of the facilities that were not only inherent in the structure of the existing compiler but were discussed at length in its documentation, and to be based instead on additions to that structure in the form of patches that effectively destroyed its power and simplicity.</p>
-<p>在多个重大案例中，B 团队提出的解决方案被 A 团队认定为未利用现有编译器结构中固有的功能（这些功能不仅存在于现有编译器的结构中，还在其文档中进行了详细讨论），而是基于对该结构的补丁形式的扩展，这些扩展实际上破坏了编译器的强大性和简洁性。</p>
+<p>结果发现：B 团队提出的方案多次忽略现有编译器的内置特性（这些特性不仅本身存在，文档也详细说明过），反而通过打补丁的方式破坏其核心结构与简洁性。</p>
 <p>The members of group A were able to spot these cases instantly and could propose simple and effective solutions, framed entirely within the existing structure.</p>
-<p>A 团队成员能够立即识别出这些案例，并提出完全基于现有结构的简单有效解决方案。</p>
+<p>A 团队成员总能立刻识别出问题，并提出巧妙解决方案，这些方案完全利用了现有结构优势。</p>
 <p>This is an example of how the full program text and additional documentation is insufficient in conveying to even the highly motivated group B the deeper insight into the design, that theory which is immediately present to the members of group A.</p>
-<p>这是一个例子，说明完整的程序文本和额外文档不足以向即使是高度积极的 B 团队传达对设计更深层次的理解，这种理论对 A 团队成员来说是显而易见的。</p>
-<p>这是一个例子，说明完整的程序文本和额外文档不足以向即使是高度积极的 B 组传达对设计更深层次的理解，这种理论对 A 组成员来说是显而易见的。</p>
+<p>即便有完整的代码和文档，实力强劲的 B 团队也无法掌握原始编译器的设计精髓，而这些核心理论在 A 团队成员心中早已不言自明。</p>
 <p>In the years following these events the compiler developed by group B was taken over by other programmers of the same organization, without guidance from group A.</p>
-<p>在这些事件之后的几年里，B 团队开发的编译器被同一组织中的其他程序员接手，没有 A 团队的指导。</p>
-<p>Information obtained by a member of group A about the compiler resulting from the further modification of it after about 10 years made it clear that at that later stage the original powerful structure was still visible, but made
-entirely ineffective by amorphous additions of many different kinds.</p>
-<p>A 团队成员在约 10 年后对编译器进一步修改后获得的信息表明，在后期阶段，原始强大的结构仍然可见，但由于各种无序的添加，使其完全无效。</p>
+<p>此后数年里，该编译器移交给了同一机构的其它程序员维护，且未再获得 A 团队的指导。</p>
+<p>Information obtained by a member of group A about the compiler resulting from the further modification of it after about 10 years made it clear that at that later stage the original powerful structure was still visible, but made entirely ineffective by amorphous additions of many different kinds.</p>
+<p>大约 10 年后，A 团队成员在后续修改中发现：原始编译器的强大架构核心虽然可见，却被各种混乱的代码堆砌破坏得面目全非，完全丧失了所有结构性优势。​</p>
 <p>Thus, again, the program text and its documentation has proved insufficient as a carrier of some of the most important design ideas.</p>
-<p>因此，程序文本及其文档再次证明，作为承载某些最重要设计理念的载体，它们是不足的。</p>
+<p>由此可见，程序代码和文档根本承载不了最核心的设计理念。</p>
 <p>Case 2 concerns the installation and fault diagnosis of a large real–time system for monitoring industrial production activities.</p>
-<p>案例 2 涉及一个大型实时工业生产活动监测系统的安装与故障诊断。</p>
+<p>案例 2 涉及一套用于工业生产监控的大型实时系统的安装部署和故障排查。</p>
 <p>The system is marketed by its producer, each delivery of the system being adapted individually to its specific environment of sensors and display devices.</p>
-<p>该系统由其制造商进行推广，每次交付的系统均会根据其特定的传感器和显示设备环境进行个性化适配。</p>
+<p>该系统的制造商负责销售，每次交付时都会根据具体使用环境单独定制传感器和显示设备。</p>
 <p>The size of the program delivered in each installation is of the order of 200,000 lines.</p>
-<p>每次安装交付的程序规模约为 20 万行。</p>
+<p>每个交付系统的程序规模约 20 万行代码。</p>
 <p>The relevant experience from the way this kind of system is handled concerns the role and manner of work of the group of installation and fault finding programmers.</p>
-<p>关于此类系统处理方式的相关经验，主要涉及安装与故障排查程序员团队的角色及工作方式。</p>
+<p>这类系统的核心经验在于：安装和故障排查团队的角色与工作方式。</p>
 <p>The facts are, first that these programmers have been closely concerned with the system as a full time occupation over a period of several years, from the time the system was under design.</p>
-<p>具体而言，首先，这些程序员自系统设计阶段起，便以全职身份长期参与系统相关工作。</p>
+<p>具体而言，这些程序员从系统设计阶段就全职深度参与，持续投入多年时间。</p>
 <p>Second, when diagnosing a fault these programmers rely almost exclusively on their ready knowledge of the system and the annotated program text, and are unable to conceive of any kind of additional documentation that would be useful to them.</p>
-<p>其次，在诊断故障时，这些程序员几乎完全依赖对系统和注释程序文本的熟练掌握，无法想象任何额外的文档对他们会有所帮助。</p>
+<p>其次，当进行故障诊断时，这些程序员几乎完全依赖自身对系统的实战经验和带注释的源代码，根本无法想得到其他对他们有用的补充文档类型。</p>
 <p>Third, other programmers’ groups who are responsible for the operation of particular installations of the system, and thus receive documentation of the system and full guidance on its use from the producer’s staff, regularly encounter difficulties that upon consultation with the producer’s installation and fault finding programmer are traced to inadequate understanding of the existing documentation, but which can be cleared up easily by the installation and fault finding programmers.</p>
-<p>第三，负责系统特定安装运行工作的其他程序员团队，虽从制造商工作人员处获得系统文档及使用指导，但在咨询制造商的安装与故障排查程序员后，常发现其遇到的困难源于对现有文档理解不足，而这些问题可由安装与故障排查程序员轻松解决。</p>
+<p>第三，负责具体系统部署的客户团队虽然拿到了厂商的完整文档和使用指南，却常因理解不足而卡壳，但厂商的安装调试程序员每次都能轻松解决问题。</p>
 <p>The conclusion seems inescapable that at least with certain kinds of large programs, the continued adaption, modification, and correction of errors in them, is essentially dependent on a certain kind of knowledge possessed by a group of programmers who are closely and continuously connected with them.</p>
-<p>结论似乎不可避免：至少对于某些大型程序而言，其持续的适应、修改和错误修正，本质上依赖于一群与之紧密且持续关联的程序员所掌握的特定知识。</p>
+<p>核心结论是：对于某些大型程序而言，其持续调整、修改和纠错能力，本质上依赖于特定程序员团队的专有知识，这些程序员必须与程序保持长期密切接触。</p>
 
                     </main>
 
@@ -232,7 +230,7 @@ entirely ineffective by amorphous additions of many different kinds.</p>
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="02.Ryle的理论概念.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="03.Ryle的理论概念.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -246,7 +244,7 @@ entirely ineffective by amorphous additions of many different kinds.</p>
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="02.Ryle的理论概念.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="03.Ryle的理论概念.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
