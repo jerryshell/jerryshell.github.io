@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>应用「理论构建」 - 编程即理论构建</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">编程即理论构建</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="应用理论构建"><a class="header" href="#应用理论构建">应用「理论构建」</a></h1>
+<p>Viewing programming as theory building helps us understand “metaphor building” activity in Extreme Programming (XP), and the respective roles of tacit knowledge and documentation in passing along design knowledge.</p>
+<p>将编程视为理论构建有助于我们理解极端编程（XP）中的“隐喻构建”活动，以及 tacit 知识和文档在传递设计知识中的各自作用。</p>
+<h2 id="the-metaphor-as-a-theory-隐喻作为理论"><a class="header" href="#the-metaphor-as-a-theory-隐喻作为理论">The Metaphor as a Theory. 隐喻作为理论。</a></h2>
+<p>Kent Beck suggested that it is useful to a design team to simplify the general design of a program to match a single metaphor.</p>
+<p>Kent Beck 建议，将程序的整体设计简化为与单一隐喻相匹配，对设计团队是有益的。</p>
+<p>Examples might be, “This program really looks like an assembly line, with things getting added to a chassis along the line,” or “This program really looks like a restaurant, with waiters and menus, cooks and cashiers.” If the metaphor is good, the many associations the designers create around the metaphor turn out to be appropriate to their programming situation.</p>
+<p>例如，“这个程序看起来就像一条装配线，沿着生产线不断添加部件”，或者“这个程序看起来就像一家餐厅，有服务员和菜单、厨师和收银员”。如果隐喻恰当，设计师围绕隐喻建立的各种联想将与他们的编程情境相契合。</p>
+<p>That is exactly Naur’s idea of passing along a theory of the design.</p>
+<p>这正是 Naur 关于传递设计理论的观点。</p>
+<p>If “assembly line” is an appropriate metaphor, then later programmers, considering what they know about assembly lines, will make guesses about the structure of the software at hand and find that their guesses are “close.” That is an extraordinary power for just the two words, “assembly line.” The value of a good metaphor increases with the number of designers.</p>
+<p>如果“装配线”是一个恰当的比喻，那么后来程序员在考虑他们对装配线的了解时，会对当前软件的结构做出猜测，并发现他们的猜测是“接近的”。这仅仅是“装配线”这两个词所蕴含的非凡力量。一个好比喻的价值随着设计师数量的增加而增加。</p>
+<p>The closer each person’s guess is “close” to the other people’s guesses, the greater the resulting consistency in the final system design.</p>
+<p>每个人猜测的“接近度”与他人猜测的接近度越高，最终系统设计的一致性就越强。</p>
+<p>Imagine 10 programmers working as fast as they can, in parallel, each making design decisions and adding classes as she goes.</p>
+<p>想象 10 名程序员以最快速度并行工作，各自在编写代码时做出设计决策并添加类。</p>
+<p>Each will necessarily develop her own theory as she goes.</p>
+<p>每个人在工作中必然会形成自己的理论。</p>
+<p>As each adds code, the theory that binds their work becomes less and less coherent, more and more complicated.</p>
+<p>随着每个人添加代码，将他们的工作联系在一起的理论变得越来越不连贯，越来越复杂。</p>
+<p>Not only maintenance gets harder, but their own work gets harder.</p>
+<p>不仅维护变得困难，他们自己的工作也变得困难。</p>
+<p>The design easily becomes a “kludge.” If they have a common theory, on the other hand, they add code in ways that fit together.</p>
+<p>设计很容易变成“权宜之计”。另一方面，如果他们有一个共同的理论，他们添加代码的方式会相互契合。</p>
+<p>An appropriate, shared metaphor lets a person guess accurately where someone else on the team just added code, and how to fit her new piece in with it.</p>
+<p>一个恰当的、共享的比喻能让团队成员准确推测他人刚添加代码的位置，并知道如何将自己的新代码与之衔接。</p>
+<h2 id="tacit-knowledge-and-documentation-tacit-knowledge-和文档"><a class="header" href="#tacit-knowledge-and-documentation-tacit-knowledge-和文档">Tacit Knowledge and Documentation. Tacit Knowledge 和文档。</a></h2>
+<p>The documentation is almost certainly behind the current state of the program, but people are good at looking around.</p>
+<p>文档几乎肯定落后于程序的当前状态，但人们擅长观察环境。</p>
+<p>What should you put into the documentation? That which helps the next programmer build an adequate theory of the program.</p>
+<p>文档中应包含什么内容？那些能帮助下一位程序员构建程序充分理论的内容。</p>
+<p>This is enormously important.</p>
+<p>这极为重要。</p>
+<p>The purpose of the documentation is to jog memories in the reader, set up relevant pathways of thought about experiences and metaphors.</p>
+<p>文档的目的是唤起读者的记忆，建立与经验和隐喻相关的思维路径。</p>
+<p>This sort of documentation is more stable over the life of the program than just naming the pieces of the system currently in place.</p>
+<p>此类文档在程序生命周期中比仅仅命名当前系统中的各个部分更为稳定。</p>
+<p>The designers are allowed to use whatever forms of expression are necessary to set up those relevant pathways.</p>
+<p>设计师可以使用任何必要的表达形式来建立这些相关路径。</p>
+<p>They can even use multiple metaphors, if they don’t find one that is adequate for the entire program.</p>
+<p>如果找不到一个适用于整个程序的隐喻，他们甚至可以使用多个隐喻。</p>
+<p>They might say that one section implements a fractal compression algorithm, a second is like an accounting ledger, the user interface follows the model-observer design pattern, and so on.</p>
+<p>他们可能会说，某一模块实现了分形压缩算法，另一模块类似于会计账簿，用户界面遵循模型-观察者设计模式，等等。</p>
+<p>Experienced designers often start their documentation with just</p>
+<p>有经验的设计师通常会从以下三点开始文档编写：</p>
+<ul>
+<li>The metaphors 隐喻</li>
+<li>Text describing the purpose of each major component 描述每个主要组件目的的文本</li>
+<li>Drawings of the major interactions between the major components 主要组件之间主要交互的示意图</li>
+</ul>
+<p>These three items alone take the next team a long way to constructing a useful theory of the design.</p>
+<p>仅这三项内容就能为下一支团队构建有用的设计理论提供很大帮助。</p>
+<p>The source code itself serves to communicate a theory to the next programmer.</p>
+<p>源代码本身用于向下一位程序员传达理论。</p>
+<p>Simple, consistent naming conventions help the next person build a coherent theory.</p>
+<p>简单一致的命名规范有助于下一位开发者构建连贯的系统理论。</p>
+<p>When people talk about “clean code,” a large part of what they are referring to is how easily the reader can build a coherent theory of the system.</p>
+<p>当人们谈论“干净代码”时，很大程度上指的是读者构建系统连贯理论的便捷性。</p>
+<p>Documentation cannot—and so need not—say everything.</p>
+<p>文档无需——也不必——涵盖所有内容。</p>
+<p>Its purpose is to help the next programmer build an accurate theory about the system.</p>
+<p>其目的是帮助下一位程序员构建关于系统的准确理论。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="08.结论.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="08.结论.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

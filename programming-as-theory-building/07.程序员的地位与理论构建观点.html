@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>程序员的地位与理论构建观点 - 编程即理论构建</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">编程即理论构建</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="程序员的地位与理论构建观点"><a class="header" href="#程序员的地位与理论构建观点">程序员的地位与理论构建观点</a></h1>
+<p>The areas where the consequences of the Theory Building View contrast most strikingly with those of the more prevalent current views are those of the programmers’ personal contribution to the activity and of the programmers’ proper status.</p>
+<p>理论构建视角与当前更为主流的观点在以下两个方面存在最显著的差异：程序员对活动个人贡献的看法以及程序员的适当地位。</p>
+<p>The contrast between the Theory Building View and the more prevalent view of the programmers’ personal contribution is apparent in much of the common discussion of programming.</p>
+<p>理论构建视角与主流观点在程序员个人贡献方面的差异在编程领域的常见讨论中显而易见。</p>
+<p>As just one example, consider the study of modifiability of large software systems by Oskarsson [7].</p>
+<p>以 Oskarsson [7] 对大型软件系统可修改性的研究为例。</p>
+<p>This study gives extensive information on a considerable number of modifications in one release of a large commercial system.</p>
+<p>该研究对某大型商业系统某一版本中的大量修改提供了详尽信息。</p>
+<p>The description covers the background, substance, and implementation, of each modification, with particular attention to the manner in which the program changes are confined to particular program modules.</p>
+<p>描述涵盖了每项修改的背景、内容和实现方式，特别关注程序变更如何局限于特定程序模块。</p>
+<p>However, there is no suggestion whatsoever that the implementation of the modifications might depend on the background of the 500 programmers employed on the project, such as the length of time they have been working on it, and there is no indication of the manner in which the design decisions are distributed among the 500 programmers.</p>
+<p>然而，研究中完全没有提及修改的实现可能取决于参与项目的 500 名程序员的背景，例如他们参与项目的时间长短，也没有说明设计决策在 500 名程序员中的分配方式。</p>
+<p>Even so the significance of an underlying theory is admitted indirectly in statements such as that ‘decisions were implemented in the wrong block’ and in a reference to ‘a philosophy of AXE’.</p>
+<p>即便如此，底层理论的重要性仍通过诸如“决策被错误地实施在错误的模块中”以及对“AXE 哲学”的提及等表述间接承认。</p>
+<p>However, by the manner in which the study is conducted these admissions can only remain isolated indications.</p>
+<p>然而，由于研究的开展方式，这些承认只能作为孤立的迹象存在。</p>
+<p>More generally, much current discussion of programming seems to assume that programming is similar to industrial production, the programmer being regarded as a component of that production, a component that has to be controlled by rules of procedure and which can be replaced easily.</p>
+<p>更普遍地说，当前关于编程的大部分讨论似乎假设编程类似于工业生产，程序员被视为生产过程中的一个组成部分，一个必须受程序规则控制且可以轻易替换的组成部分。</p>
+<p>Another related view is that human beings perform best if they act like machines, by following rules, with a consequent stress on formal modes of expression, which make it possible to formulate certain arguments in terms of rules of formal manipulation.</p>
+<p>另一种相关观点认为，人类如果像机器一样遵循规则行事，就能发挥最佳水平，因此强调形式化的表达方式，这使得某些论点可以以形式化操作规则的形式进行表述。</p>
+<p>Such views agree well with the notion, seemingly common among persons working with computers, that the human mind works like a computer.</p>
+<p>这些观点与计算机从业者中普遍存在的观念相契合，即人类思维运作方式类似于计算机。</p>
+<p>At the level of industrial management these views support treating programmers as workers of fairly low responsibility, and only brief education.</p>
+<p>在工业管理层面，这些观点支持将程序员视为责任较轻、仅需简短培训的工人。</p>
+<p>On the Theory Building View the primary result of the programming activity is the theory held by the programmers.</p>
+<p>在理论构建视角下，编程活动的首要成果是程序员所持有的理论。</p>
+<p>Since this theory by its very nature is part of the mental possession of each programmer, it follows that the notion of the programmer as an easily replaceable component in the program production activity has to be abandoned.</p>
+<p>由于这种理论本质上是每位程序员的心理财富，因此必须放弃将程序员视为程序生产活动中可轻易替换的组件这一观念。</p>
+<p>Instead the programmer must be regarded as a responsible developer and manager of the activity in which the computer is a part.</p>
+<p>相反，程序员必须被视为计算机作为其中一部分的活动中的负责任开发者和管理者。</p>
+<p>In order to fill this position he or she must be given a permanent position, of a status similar to that of other professionals, such as engineers and lawyers, whose active contributions as employers of enterprises rest on their intellectual proficiency.</p>
+<p>为了担任这一角色，他或她必须获得一个永久职位，其地位应与其他专业人士（如工程师和律师）相当，这些专业人士作为企业雇主的积极贡献基于其智力专业能力。</p>
+<p>The raising of the status of programmers suggested by the Theory Building View will have to be supported by a corresponding reorientation of the programmer education.</p>
+<p>理论构建视角所提议的程序员地位提升，必须通过相应的程序员教育改革来支持。</p>
+<p>While skills such as the mastery of notations, data representations, and data processes, remain important, the primary emphasis would have to turn in the direction of furthering the understanding and talent for theory formation.</p>
+<p>虽然掌握符号、数据表示和数据处理等技能仍然重要，但重点必须转向促进对理论构建的理解和才能。</p>
+<p>To what extent this can be taught at all must remain an open question.</p>
+<p>这种能力在多大程度上可以教授，仍是一个开放的问题。</p>
+<p>The most hopeful approach would be to have the student work on concrete problems under guidance, in an active and constructive environment.</p>
+<p>最有希望的方法是让学生在指导下，在一个积极和建设性的环境中解决具体问题。</p>
+<hr />
+<ol>
+<li>Brooks, R. E. Studying programmer behaviour experimentally. Comm. ACM 23(4): 207–213, 1980.</li>
+<li>Feyerabend, P. Against Method. London, Verso Editions, 1978; ISBN: 86091–700–2.</li>
+<li>Floyd, C. Eine Untersuchung von Software–Entwicklungs–Methoden. Pp. 248–274 in Programmierumgebungen und Compiler, ed H. Morgenbrod and W. Sammer, Tagung I/1984 des German Chapter of the ACM, Stuttgart, Teubner Verlag, 1984; ISBN: 3–519–02437–3.</li>
+<li>Kuhn, T.S. The Structure of Scientific Revolutions, Second Edition. Chicago, University of Chicago Press, 1970; ISBN: 0–226–45803–2.</li>
+<li>Medawar, P. Pluto’s Republic. Oxford, University Press, 1982: ISBN: 0–19–217726–5.</li>
+<li>Moher, T., and Schneider, G. M. Methodology and experimental research in software engineering, Int. J. Man–Mach. Stud. 16: 65–87, 1. Jan. 1982.</li>
+<li>Oskarsson, ¨O Mechanisms of modifiability in large software systems Link¨oping Studies in Science and Technology, Dissertations, no. 77, Link¨oping, 1982; ISBN: 91–7372–527–7.</li>
+<li>Polya, G. How To Solve It . New York, Doubleday Anchor Book, 1957.</li>
+<li>Polya, G. Mathematics and Plausible Reasoning. New Jersey, Princeton University Press, 1954.</li>
+<li>Popper, K. R., and Eccles, J. C. The Self and Its Brain. London, Routledge and Kegan Paul, 1977.</li>
+<li>Ryle, G. The Concept of Mind. Harmondsworth, England, Penguin, 1963, first published 1949. Applying “Theory Building”</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="06.方法和理论构建.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="08.结论.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="06.方法和理论构建.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="08.结论.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

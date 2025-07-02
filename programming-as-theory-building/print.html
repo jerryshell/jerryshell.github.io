@@ -1,0 +1,744 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>编程即理论构建</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">编程即理论构建</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>PDF: https://pablo.rauzy.name/dev/naur1985programming.pdf</p>
+<hr />
+<h1 id="引言"><a class="header" href="#引言">引言</a></h1>
+<p>Peter Naur’s classic 1985 essay "Programming as Theory Building" argues that a program is not its source code.</p>
+<p>Peter Naur 在 1985 年发表的经典文章《编程即理论构建》中指出，程序不是源代码。</p>
+<p>A program is a shared mental construct (he uses the word theory) that lives in the minds of the people who work on it.</p>
+<p>程序是一种共享的心理结构（他使用了理论一词），它存在于程序设计人员的头脑中。</p>
+<p>If you lose the people, you lose the program.</p>
+<p>如果失去了这些人，也就失去了程序。</p>
+<p>The code is merely a written representation of the program, and it’s lossy, so you can’t reconstruct a program from its code.</p>
+<p>代码只是程序的书面表述，它是有损的，所以你无法从代码中重建程序。</p>
+<hr />
+<p>The present discussion is a contribution to the understanding of what programming is.</p>
+<p>本讨论旨在加深对编程本质的理解。</p>
+<p>It suggests that programming properly should be regarded as an activity by which the programmers form or achieve a certain kind of insight, a theory, of the matters at hand.</p>
+<p>它提出，编程本质上应被视为一种活动，通过这种活动，程序员能够形成或获得对当前问题的某种洞见或理论。</p>
+<p>This suggestion is in contrast to what appears to be a more common notion, that programming should be regarded as a production of a program and certain other texts.</p>
+<p>这一观点与普遍存在的另一种观念形成对比，即编程应被视为生成程序及其他相关文本的过程。</p>
+<p>Some of the background of the views presented here is to be found in certain observations of what actually happens to programs and the teams of programmers dealing with them, particularly in situations arising from unexpected and perhaps erroneous program executions or reactions, and on the occasion of modifications of programs.</p>
+<p>本文观点的部分背景源于对程序及处理程序的程序员团队实际运作的观察，尤其是在面对意外或可能错误的程序执行或反应，以及程序修改等情境时。</p>
+<p>The difficulty of accommodating such observations in a production view of programming suggests that this view is misleading.</p>
+<p>将此类观察纳入“生产视角”的编程观中存在困难，这表明该视角具有误导性。</p>
+<p>The theory building view is presented as an alternative.</p>
+<p>本文提出“理论构建视角”作为替代方案。</p>
+<p>A more general background of the presentation is a conviction that it is important to have an appropriate understanding of what programming is.</p>
+<p>本次讨论的更广泛背景在于，我们坚信对编程本质的恰当理解至关重要。</p>
+<p>If our understanding is inappropriate we will misunderstand the difficulties that arise in the activity and our attempts to overcome them will give rise to conflicts and frustrations.</p>
+<p>若我们的理解不恰当，我们将误解该活动中出现的困难，而试图克服这些困难的努力将导致冲突与挫败感。</p>
+<p>In the present discussion some of the crucial background experience will first be outlined.</p>
+<p>在当前讨论中，将首先概述部分关键的背景经验。</p>
+<p>This is followed by an explanation of a theory of what programming is, denoted the Theory Building View.</p>
+<p>随后将解释一种关于编程的理论，即理论构建视角。</p>
+<p>The subsequent sections enter into some of the consequences of the Theory Building View.</p>
+<p>后续部分将探讨理论构建视角的一些后果。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="编程与程序员的知识"><a class="header" href="#编程与程序员的知识">编程与程序员的知识</a></h1>
+<p>I shall use the word programming to denote the whole activity of design and implementation of programmed solutions.</p>
+<p>我将使用“编程”一词来指代设计和实现程序化解决方案的全部活动。</p>
+<p>What I am concerned with is the activity of matching some significant part and aspect of an activity in the real world to the formal symbol manipulation that can be done by a program running on a computer.</p>
+<p>我关注的是将现实世界中某一重要部分和方面与计算机上运行的程序所能进行的正式符号操作相匹配的活动。</p>
+<p>With such a notion it follows directly that the programming activity I am talking about must include the development in time corresponding to the changes taking place in the real world activity being matched by the program execution, in other words program modifications.</p>
+<p>基于此概念，我所讨论的编程活动必然包含与现实世界活动中所发生变化相对应的程序执行过程中的时间发展，换言之即程序修改。</p>
+<p>One way of stating the main point I want to make is that programming in this sense primarily must be the programmers’ building up knowledge of a certain kind, knowledge taken to be basically the programmers’ immediate possession, any documentation being an auxiliary, secondary product.</p>
+<p>我想要阐明的核心观点之一是：在此意义上，编程本质上是程序员构建某种特定知识的过程，这种知识被视为程序员的直接掌握，而任何文档仅是辅助的次要产物。</p>
+<p>As a background of the further elaboration of this view given in the following sections, the remainder of the present section will describe some real experience of dealing with large programs that has seemed to me more and more significant as I have pondered over the problems.</p>
+<p>作为对本节后续部分进一步阐述这一观点的背景，本节剩余部分将描述一些处理大型程序的实际经验，这些经验在我思考相关问题时显得越来越重要。</p>
+<p>In either case the experience is my own or has been communicated to me by persons having first hand contact with the activity in question.</p>
+<p>无论哪种情况，这些经验都是我自己的，或是由与相关活动有直接接触的人士向我传达的。</p>
+<p>Case 1 concerns a compiler.</p>
+<p>案例 1 涉及一个编译器。</p>
+<p>It has been developed by a group A for a Language L and worked very well on computer X.</p>
+<p>该编译器由 A 团队为语言 L 开发，并在计算机 X 上运行良好。</p>
+<p>Now another group B has the task to write a compiler for a language L + M, a modest extension of L, for computer Y.</p>
+<p>现在，另一团队 B 需要为语言 L + M（L 的 modest 扩展）开发编译器，用于计算机 Y。</p>
+<p>Group B decides that the compiler for L developed by group A will be a good starting point for their design, and get a contract with group A that they will get support in the form of full documentation, including annotated program texts and much additional written design discussion, and also personal advice.</p>
+<p>团队 B 决定将团队 A 开发的 L 语言编译器作为其设计的基础，并与团队 A 签订合同，约定将获得全面的文档支持，包括带注释的程序文本和大量额外的书面设计讨论，以及个人建议。</p>
+<p>The arrangement was effective and group B managed to develop the compiler they wanted.</p>
+<p>该安排行之有效，B 团队成功开发出了他们想要的编译器。</p>
+<p>In the present context the significant issue is the importance of the personal advice from group A in the matters that concerned how to implement the extensions M to the language.</p>
+<p>在当前语境下，关键问题在于 A 团队在如何实现语言扩展 M 方面提供的个人建议的重要性。</p>
+<p>During the design phase group B made suggestions for the manner in which the extensions should be accommodated and submitted them to group A for review.</p>
+<p>在设计阶段，B 团队提出了关于如何实现扩展的建议，并提交给 A 组进行审查。</p>
+<p>In several major cases it turned out that the solutions suggested by group B were found by group A to make no use of the facilities that were not only inherent in the structure of the existing compiler but were discussed at length in its documentation, and to be based instead on additions to that structure in the form of patches that effectively destroyed its power and simplicity.</p>
+<p>在多个重大案例中，B 团队提出的解决方案被 A 团队认定为未利用现有编译器结构中固有的功能（这些功能不仅存在于现有编译器的结构中，还在其文档中进行了详细讨论），而是基于对该结构的补丁形式的扩展，这些扩展实际上破坏了编译器的强大性和简洁性。</p>
+<p>The members of group A were able to spot these cases instantly and could propose simple and effective solutions, framed entirely within the existing structure.</p>
+<p>A 团队成员能够立即识别出这些案例，并提出完全基于现有结构的简单有效解决方案。</p>
+<p>This is an example of how the full program text and additional documentation is insufficient in conveying to even the highly motivated group B the deeper insight into the design, that theory which is immediately present to the members of group A.</p>
+<p>这是一个例子，说明完整的程序文本和额外文档不足以向即使是高度积极的 B 团队传达对设计更深层次的理解，这种理论对 A 团队成员来说是显而易见的。</p>
+<p>这是一个例子，说明完整的程序文本和额外文档不足以向即使是高度积极的 B 组传达对设计更深层次的理解，这种理论对 A 组成员来说是显而易见的。</p>
+<p>In the years following these events the compiler developed by group B was taken over by other programmers of the same organization, without guidance from group A.</p>
+<p>在这些事件之后的几年里，B 团队开发的编译器被同一组织中的其他程序员接手，没有 A 团队的指导。</p>
+<p>Information obtained by a member of group A about the compiler resulting from the further modification of it after about 10 years made it clear that at that later stage the original powerful structure was still visible, but made
+entirely ineffective by amorphous additions of many different kinds.</p>
+<p>A 团队成员在约 10 年后对编译器进一步修改后获得的信息表明，在后期阶段，原始强大的结构仍然可见，但由于各种无序的添加，使其完全无效。</p>
+<p>Thus, again, the program text and its documentation has proved insufficient as a carrier of some of the most important design ideas.</p>
+<p>因此，程序文本及其文档再次证明，作为承载某些最重要设计理念的载体，它们是不足的。</p>
+<p>Case 2 concerns the installation and fault diagnosis of a large real–time system for monitoring industrial production activities.</p>
+<p>案例 2 涉及一个大型实时工业生产活动监测系统的安装与故障诊断。</p>
+<p>The system is marketed by its producer, each delivery of the system being adapted individually to its specific environment of sensors and display devices.</p>
+<p>该系统由其制造商进行推广，每次交付的系统均会根据其特定的传感器和显示设备环境进行个性化适配。</p>
+<p>The size of the program delivered in each installation is of the order of 200,000 lines.</p>
+<p>每次安装交付的程序规模约为 20 万行。</p>
+<p>The relevant experience from the way this kind of system is handled concerns the role and manner of work of the group of installation and fault finding programmers.</p>
+<p>关于此类系统处理方式的相关经验，主要涉及安装与故障排查程序员团队的角色及工作方式。</p>
+<p>The facts are, first that these programmers have been closely concerned with the system as a full time occupation over a period of several years, from the time the system was under design.</p>
+<p>具体而言，首先，这些程序员自系统设计阶段起，便以全职身份长期参与系统相关工作。</p>
+<p>Second, when diagnosing a fault these programmers rely almost exclusively on their ready knowledge of the system and the annotated program text, and are unable to conceive of any kind of additional documentation that would be useful to them.</p>
+<p>其次，在诊断故障时，这些程序员几乎完全依赖对系统和注释程序文本的熟练掌握，无法想象任何额外的文档对他们会有所帮助。</p>
+<p>Third, other programmers’ groups who are responsible for the operation of particular installations of the system, and thus receive documentation of the system and full guidance on its use from the producer’s staff, regularly encounter difficulties that upon consultation with the producer’s installation and fault finding programmer are traced to inadequate understanding of the existing documentation, but which can be cleared up easily by the installation and fault finding programmers.</p>
+<p>第三，负责系统特定安装运行工作的其他程序员团队，虽从制造商工作人员处获得系统文档及使用指导，但在咨询制造商的安装与故障排查程序员后，常发现其遇到的困难源于对现有文档理解不足，而这些问题可由安装与故障排查程序员轻松解决。</p>
+<p>The conclusion seems inescapable that at least with certain kinds of large programs, the continued adaption, modification, and correction of errors in them, is essentially dependent on a certain kind of knowledge possessed by a group of programmers who are closely and continuously connected with them.</p>
+<p>结论似乎不可避免：至少对于某些大型程序而言，其持续的适应、修改和错误修正，本质上依赖于一群与之紧密且持续关联的程序员所掌握的特定知识。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ryle-的理论概念"><a class="header" href="#ryle-的理论概念">Ryle 的理论概念</a></h1>
+<p>If it is granted that programming must involve, as the essential part, a building up of the programmers’ knowledge, the next issue is to characterize that knowledge more closely.</p>
+<p>如果承认编程必须包含作为核心部分的程序员知识的构建，那么接下来的问题就是更准确地界定这种知识。</p>
+<p>What will be considered here is the suggestion that the programmers’ knowledge properly should be regarded as a theory, in the sense of Ryle [11].</p>
+<p>本文将探讨这样一种观点：程序员的知识应当被视为一种理论，具体而言是 Ryle [11] 所指的理论。</p>
+<p>Very briefly, a person who has or possesses a theory in this sense knows how to do certain things and in addition can support the actual doing with explanations, justifications, and answers to queries, about the activity of concern.</p>
+<p>简而言之，拥有此意义上理论的人不仅知道如何做某些事情，还能通过解释、理由和对相关活动的疑问的回答来支持实际操作。</p>
+<p>It may be noted that Ryle’s notion of theory appears as an example of what K.</p>
+<p>值得注意的是，Ryle 的理论概念可视为 K.</p>
+<p>Popper [10] calls unembodied World objects and thus has a defensible philosophical standing.</p>
+<p>Popper [10] 所称的“非物质化世界对象”的例子，因此具有可辩护的哲学地位。</p>
+<p>In the present section we shall describe Ryle’s notion of theory in more detail.</p>
+<p>在本节中，我们将更详细地描述 Ryle 的理论概念。</p>
+<p>Ryle [11] develops his notion of theory as part of his analysis of the nature of intellectual activity, particularly the manner in which intellectual activity differs from, and goes beyond, activity that is merely intelligent.</p>
+<p>Ryle [11] 在其对智力活动本质的分析中发展了这一理论概念，特别是智力活动如何区别于并超越单纯的智能活动。</p>
+<p>In intelligent behaviour the person displays, not any particular knowledge of facts, but the ability to do certain things, such as to make and appreciate jokes, to talk grammatically, or to fish.</p>
+<p>在智能行为中，个人展示的并非对事实的特定知识，而是做某些事情的能力，例如讲笑话并欣赏笑话、进行语法正确的对话，或钓鱼。</p>
+<p>More particularly, the intelligent performance is characterized in part by the person’s doing them well, according to certain criteria, but further displays the person’s ability to apply the criteria so as to detect and correct lapses, to learn from the examples of others, and so forth.</p>
+<p>更具体地说，智能表现部分体现在个人根据某些标准做好这些事情，但进一步展示了个人应用这些标准以发现并纠正偏差、从他人的例子中学习等能力。</p>
+<p>It may be noted that this notion of intelligence does not rely on any notion that the intelligent behaviour depends on the person’s following or adhering to rules, prescriptions, or methods.</p>
+<p>值得注意的是，这种对智能的理解并不依赖于智能行为依赖于个人遵循或遵守规则、规定或方法的观念。</p>
+<p>On the contrary, the very act of adhering to rules can be done more or less intelligently; if the exercise of intelligence depended on following rules there would have to be rules about how to follow rules, and about how to follow the rules about following rules, etc. in an infinite regress, which is absurd.</p>
+<p>相反，遵循规则的行为本身可以更或更不智能地进行；如果智能的行使依赖于遵循规则，那么就必须有关于如何遵循规则的规则，以及关于如何遵循关于遵循规则的规则的规则，等等，这将导致无限回归，这是荒谬的。</p>
+<p>What characterizes intellectual activity, over and beyond activity that is merely intelligent, is the person’s building and having a theory, where theory is understood as the knowledge a person must have in order not only to do certain things intelligently but also to explain them, to answer queries about them, to argue about them, and so forth.</p>
+<p>区分智力活动与单纯智能活动的关键在于，个人是否构建并拥有理论。此处“理论”指的是个人必须具备的知识，不仅用于智能地完成某些事情，还用于解释这些事情、回答相关问题、进行辩论等。</p>
+<p>A person who has a theory is prepared to enter into such activities; while building the theory the person is trying to get it.</p>
+<p>拥有理论的个人准备参与此类活动；在构建理论的过程中，个人正在努力获得它。</p>
+<p>The notion of theory in the sense used here applies not only to the elaborate constructions of specialized fields of enquiry, but equally to activities that any person who has received education will participate in on certain occasions.</p>
+<p>本文所使用的“理论”概念不仅适用于专门研究领域中复杂的理论构建，也同样适用于任何受过教育的人在某些场合会参与的活动。</p>
+<p>Even quite unambitious activities of everyday life may give rise to people’s theorizing, for example in planning how to place furniture or how to get to some place by means of certain means of transportation.</p>
+<p>即使是日常生活中看似平凡的活动也可能引发人们的理论化思考，例如规划如何摆放家具或如何通过某种交通工具到达某个地方。</p>
+<p>The notion of theory employed here is explicitly not confined to what may be called the most general or abstract part of the insight.</p>
+<p>本文所采用的“理论”概念明确不局限于所谓最普遍或最抽象的洞见部分。</p>
+<p>For example, to have Newton’s theory of mechanics as understood here it is not enough to understand the central laws, such as that force equals mass times acceleration.</p>
+<p>例如，要理解此处所指的牛顿力学理论，仅掌握核心定律（如力等于质量乘以加速度）是不够的。</p>
+<p>In addition, as described in more detail by Kuhn [4], the person having the theory must have an understanding of the manner in which the central laws apply to certain aspects of reality, so as to be able to recognize and apply the theory to other similar aspects.</p>
+<p>此外，如 Kuhn [4] 所详细描述的，掌握该理论的人必须理解核心定律如何应用于现实的某些方面，以便能够识别并将其应用于其他类似方面。</p>
+<p>A person having Newton’s theory of mechanics must thus understand how it applies to the motions of pendulums and the planets, and must be able to recognize similar phenomena in the world, so as to be able to employ the mathematically expressed rules of the theory properly.</p>
+<p>掌握牛顿力学理论的人必须理解该理论如何应用于摆的运动和行星的运动，并能够识别现实世界中的类似现象，以便能够正确运用该理论的数学表达规则。</p>
+<p>The dependence of a theory on a grasp of certain kinds of similarity between situations and events of the real world gives the reason why the knowledge held by someone who has the theory could not, in principle, be expressed in terms of rules.</p>
+<p>理论对现实世界中某些情况和事件之间相似性的把握的依赖，解释了为什么拥有该理论的人所掌握的知识在原则上无法用规则来表达。</p>
+<p>In fact, the similarities in question are not, and cannot be, expressed in terms of criteria, no more than the similarities of many other kinds of objects, such as human faces, tunes, or tastes of wine, can be thus expressed.</p>
+<p>事实上，这些相似性无法用标准来表达，就像许多其他类型的对象，如人类面孔、旋律或葡萄酒的味道，也无法用标准来表达一样。</p>
+<hr />
+<ol>
+<li>Brooks, R. E. Studying programmer behaviour experimentally. Comm. ACM 23(4): 207–213, 1980.</li>
+<li>Feyerabend, P. Against Method. London, Verso Editions, 1978; ISBN: 86091–700–2.</li>
+<li>Floyd, C. Eine Untersuchung von Software–Entwicklungs–Methoden. Pp. 248–274 in Programmierumgebungen und Compiler, ed H. Morgenbrod and W. Sammer, Tagung I/1984 des German Chapter of the ACM, Stuttgart, Teubner Verlag, 1984; ISBN: 3–519–02437–3.</li>
+<li>Kuhn, T.S. The Structure of Scientific Revolutions, Second Edition. Chicago, University of Chicago Press, 1970; ISBN: 0–226–45803–2.</li>
+<li>Medawar, P. Pluto’s Republic. Oxford, University Press, 1982: ISBN: 0–19–217726–5.</li>
+<li>Moher, T., and Schneider, G. M. Methodology and experimental research in software engineering, Int. J. Man–Mach. Stud. 16: 65–87, 1. Jan. 1982.</li>
+<li>Oskarsson, ¨O Mechanisms of modifiability in large software systems Link¨oping Studies in Science and Technology, Dissertations, no. 77, Link¨oping, 1982; ISBN: 91–7372–527–7.</li>
+<li>Polya, G. How To Solve It . New York, Doubleday Anchor Book, 1957.</li>
+<li>Polya, G. Mathematics and Plausible Reasoning. New Jersey, Princeton University Press, 1954.</li>
+<li>Popper, K. R., and Eccles, J. C. The Self and Its Brain. London, Routledge and Kegan Paul, 1977.</li>
+<li>Ryle, G. The Concept of Mind. Harmondsworth, England, Penguin, 1963, first published 1949. Applying “Theory Building”</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="程序员需要构建的理论"><a class="header" href="#程序员需要构建的理论">程序员需要构建的理论</a></h1>
+<p>In terms of Ryle’s notion of theory, what has to be built by the programmer is a theory of how certain affairs of the world will be handled by, or supported by, a computer program.</p>
+<p>根据 Ryle 的理论概念，程序员需要构建的理论是关于如何通过计算机程序处理或支持世界中某些事务的理论。</p>
+<p>On the Theory Building View of programming the theory built by the programmers has primacy over such other products as program texts, user documentation, and additional documentation such as specifications.</p>
+<p>在理论构建视角下，程序员构建的理论相对于程序文本、用户文档以及规格说明等其他产品具有优先地位。</p>
+<p>In arguing for the Theory Building View, the basic issue is to show how the knowledge possessed by the programmer by virtue of his or her having the theory necessarily, and in an essential manner, transcends that which is recorded in the documented products.</p>
+<p>在论证理论构建视角时，核心问题在于说明程序员因掌握该理论而拥有的知识，如何必然且本质上超越文档中记录的内容。</p>
+<p>The answers to this issue is that the programmer’s knowledge transcends that given in documentation in at least three essential areas:</p>
+<p>对此问题的答案是，程序员的知识在至少三个核心领域超越文档记录：</p>
+<h2 id="1"><a class="header" href="#1">1</a></h2>
+<p>The programmer having the theory of the program can explain how the solution relates to the affairs of the world that it helps to handle.</p>
+<p>拥有程序理论的程序员能够解释解决方案如何与它所帮助处理的世界事务相关联。</p>
+<p>Such an explanation will have to be concerned with the manner in which the af fairs of the world, both in their overall characteristics and their details, are, in some sense, mapped into the pro gram text and into any additional documentation.</p>
+<p>此类解释必须关注世界事务（无论是其整体特征还是细节）如何在某种意义上映射到程序文本及任何附加文档中。</p>
+<p>Thus the programmer must be able to explain, for each part of the program text and for each of its overall structural characteristics, what aspect or activity of the world is matched by it.</p>
+<p>因此，程序员必须能够解释程序文本的每一部分及其整体结构特征，与现实世界中的哪个方面或活动相对应。</p>
+<p>Conversely, for any aspect or activity of the world the programmer is able to state its manner of mapping into the program text.</p>
+<p>反之，对于现实世界中的任何方面或活动，程序员能够说明其映射到程序文本的方式。</p>
+<p>By far the largest part of the world aspects and activities will of course lie out side the scope of the program text, being irrelevant in the context.</p>
+<p>当然，现实世界中绝大多数方面和活动将超出程序文本的范围，在上下文中无关紧要。</p>
+<p>However, the decision that a part of the world is relevant can only be made by someone who un derstands the whole world.</p>
+<p>然而，判断世界某一部分是否相关，只能由理解整个世界的人来做出。</p>
+<p>This understanding must be contributed by the programmer.</p>
+<p>这种理解必须由程序员提供。</p>
+<h2 id="2"><a class="header" href="#2">2</a></h2>
+<p>The programmer having the theory of the program can explain why each part of the program is what it is, in other words is able to support the actual program text with a justification of some sort.</p>
+<p>拥有程序理论的程序员能够解释程序的每一部分为何是其本身，换言之，能够为实际程序文本提供某种形式的理由。</p>
+<p>The final basis of the justification is and must always remain the programmer’s direct, intuitive knowledge or estimate.</p>
+<p>最终的理由依据始终且必须是程序员的直接、直觉性知识或估算。</p>
+<p>This holds even where the justification makes use of reasoning, perhaps with application of design rules, quantitative estimates, comparisons with alternatives, and such like, the point being that the choice of the principles and rules, and the decision that they are relevant to the situation at hand, again must in the final analysis remain a matter of the programmer’s direct knowledge.</p>
+<p>即使理由涉及推理，例如应用设计规则、定量估算、与替代方案的比较等，关键在于选择原则和规则，以及决定它们是否与当前情况相关，最终仍必须基于程序员的直接知识。</p>
+<h2 id="3"><a class="header" href="#3">3</a></h2>
+<p>The programmer having the theory of the program is able to respond constructively to any demand for a modification of the program so as to support the affairs of the world in a new manner.</p>
+<p>拥有程序理论的程序员能够建设性地回应任何对程序进行修改以支持世界事务新方式的需求。</p>
+<p>Designing how a modifi cation is best incorporated into an established program depends on the perception of the similarity of the new demand with the operational facilities already built into the program.</p>
+<p>设计如何将修改最佳地融入现有程序，取决于对新需求与程序中已建成的操作设施之间相似性的感知。</p>
+<p>The kind of similarity that has to be per ceived is one between aspects of the world.</p>
+<p>需要感知到的相似性是世界各方面之间的相似性。</p>
+<p>It only makes sense to the agent who has knowledge of the world, that is to the programmer, and cannot be reduced to any lim ited set of criteria or rules, for reasons similar to the ones given above why the justification of the program cannot
+be thus reduced.</p>
+<p>只有具备世界知识的代理人，即程序员，才能理解这种相似性，它无法被简化为任何有限的标准或规则，原因与上述程序无法被简化为有限标准或规则的理由相似。</p>
+<p>While the discussion of the present section presents some basic arguments for adopting the Theory Building View of programming, an assessment of the view should take into account to what extent it may contribute to a coherent understanding of programming and its prob lems.</p>
+<p>尽管本节讨论提出了一些采用“理论构建视角”进行编程的基本论据，但对该视角的评估应考虑其在多大程度上能促进对编程及其问题的连贯理解。</p>
+<p>Such matters will be discussed in the following sections.</p>
+<p>相关问题将在后续章节中展开讨论。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="程序修改的问题与成本"><a class="header" href="#程序修改的问题与成本">程序修改的问题与成本</a></h1>
+<p>A prominent reason for proposing the Theory Building View of programming is the desire to establish an insight into programming suitable for supporting a sound understanding of program modifications.</p>
+<p>提出“理论构建视角”的编程理论的一个重要原因是，希望建立一种适合支持对程序修改进行合理理解的编程洞察力。</p>
+<p>This question will therefore be the first one to be taken up for analysis.</p>
+<p>因此，这个问题将成为第一个被分析的对象。</p>
+<p>One thing seems to be agreed by everyone, that software will be modified.</p>
+<p>有一点似乎是众所周知的，即软件将会被修改。</p>
+<p>It is invariably the case that a program, once in operation, will be felt to be only part of the answer to the problems at hand.</p>
+<p>一旦程序投入运行，人们往往会觉得它只是解决当前问题的一部分答案。</p>
+<p>Also the very use of the program itself will inspire ideas for further useful services that the program ought to provide.</p>
+<p>此外，程序本身的使用也会激发人们对程序应提供的进一步有用功能的构想。</p>
+<p>Hence the need for ways to handle modifications.</p>
+<p>因此，需要有方法来处理修改。</p>
+<p>The question of program modifications is closely tied to that of programming costs.</p>
+<p>程序修改的问题与编程成本问题密切相关。</p>
+<p>In the face of a need for a changed manner of operation of the program, one hopes to achieve a saving of costs by making modifications of an existing program text, rather than by writing an entirely new program.</p>
+<p>面对程序运行方式需要改变的情况，人们希望通过修改现有程序文本而非编写全新程序来节省成本。</p>
+<p>The expectation that program modifications at low cost ought to be possible is one that calls for closer analysis.</p>
+<p>认为程序修改应以低于成本实现的预期，需要进行更深入的分析。</p>
+<p>First it should be noted that such an expectation cannot be supported by analogy with modifications of other complicated man–made constructions.</p>
+<p>首先需指出，此类预期无法通过类比其他复杂人造构造的修改来支撑。</p>
+<p>Where modifications are occasionally put into action, for example in the case of buildings, they are well known to be expensive and in fact complete demolition of the existing building followed by new construction is often found to be preferable economically.</p>
+<p>例如在建筑领域，虽然偶尔会进行修改，但众所周知这类修改成本高昂，事实上完全拆除现有建筑并重新建造往往在经济上更具优势。</p>
+<p>Second, the expectation of the possibility of low cost program modifications conceivably finds support in the fact that a program is a text held in a medium allowing for easy editing.</p>
+<p>其次，低成本程序修改的预期或许可从程序作为可轻松编辑的文本这一事实中获得支持。</p>
+<p>For this support to be valid it must clearly be assumed that the dominating cost is one of text manipulation.</p>
+<p>要使这种支持成立，必须明确假设主导成本是文本操作成本。</p>
+<p>This would agree with a notion of programming as text production.</p>
+<p>这与将编程视为文本生产的观念相一致。</p>
+<p>On the Theory Building View this whole argument is false.</p>
+<p>从理论构建视角来看，这一整个论点是错误的。</p>
+<p>This view gives no support to an expectation that program modifications at low cost are generally possible.</p>
+<p>这一视角无法支持低成本程序修改普遍可能的预期。</p>
+<p>A further closely related issue is that of program flexibility.</p>
+<p>另一个密切相关的问题是程序灵活性。</p>
+<p>In including flexibility in a program we build into the program certain operational facilities that are not immediately demanded, but which are likely to turn out to be useful.</p>
+<p>在程序中纳入灵活性时，我们会在程序中构建某些操作功能，这些功能并非立即被要求，但很可能最终会派上用场。</p>
+<p>Thus a flexible program is able to handle certain classes of changes of external circumstances without being modified.</p>
+<p>因此，一个灵活的程序能够在不进行修改的情况下处理某些类型的外部环境变化。</p>
+<p>It is often stated that programs should be designed to include a lot of flexibility, so as to be readily adaptable to changing circumstances.</p>
+<p>人们常说，程序应设计得具有大量灵活性，以便能够轻松适应变化的环境。</p>
+<p>Such advice may be reasonable as far as flexibility that can be easily achieved is concerned.</p>
+<p>这种建议在涉及易于实现的灵活性时可能是合理的。</p>
+<p>However, flexibility can in general only be achieved at a substantial cost.</p>
+<p>然而，灵活性通常只能以相当大的成本实现。</p>
+<p>Each item of it has to be designed, including what circumstances it has to cover and by what kind of parameters it should be controlled.</p>
+<p>每一项灵活性都必须经过设计，包括它需要覆盖的具体情况以及应通过何种参数进行控制。</p>
+<p>Then it has to be implemented, tested, and described.</p>
+<p>随后还需进行实现、测试和描述。</p>
+<p>This cost is incurred in achieving a program feature whose usefulness depends entirely on future events.</p>
+<p>这种成本是为实现一个其有用性完全取决于未来事件的程序功能而产生的。</p>
+<p>It must be obvious that built–in program flexibility is no answer to the general demand for adapting programs to the changing circumstances of the world.</p>
+<p>显然，内置程序灵活性并非应对世界变化环境下对程序适应性普遍需求的解决方案。</p>
+<p>In a program modification an existing programmed solution has to be changed so as to cater for a change in the real world activity it has to match.</p>
+<p>在程序修改中，现有程序解决方案必须进行调整，以适应其需要匹配的现实世界活动变化。</p>
+<p>What is needed in a modification, first of all, is a confrontation of the existing solution with the demands called for by the desired modification.</p>
+<p>修改所需的首要步骤是将现有解决方案与所需修改带来的需求进行对比。</p>
+<p>In this confrontation the degree and kind of similarity between the capabilities of the existing solution and the new demands has to be determined.</p>
+<p>在此对比过程中，必须确定现有解决方案的能力与新需求之间的相似程度和类型。</p>
+<p>This need for a determination of similarity brings out the merit of the Theory Building View.</p>
+<p>这种对相似性的确定需求凸显了“理论构建视角”的优势。</p>
+<p>Indeed, precisely in a determination of similarity the shortcoming of any view of programming that ignores the central requirement for the direct participation of persons who possess the appropriate insight becomes evident.</p>
+<p>事实上，正是通过对相似性的确定，任何忽视“具备适当洞察力的人员直接参与”这一核心要求的编程视角的缺陷便显而易见。</p>
+<p>The point is that the kind of similarity that has to be recognized is accessible to the human beings who possess the theory of the program, although entirely outside the reach of what can be determined by rules, since even the criteria on which to judge it cannot be formulated.</p>
+<p>关键在于，需要认定的相似性类型对掌握程序理论的人类而言是可及的，尽管它完全超出了规则可确定的范围，因为甚至用于判断它的标准也无法被明确制定。</p>
+<p>From the insight into the similarity between the new requirements and those already satisfied by the program, the programmer is able to design the change of the program text needed to implement the modification.</p>
+<p>通过对新需求与程序已满足需求之间相似性的洞察，程序员能够设计实现修改所需的程序文本变更。</p>
+<p>In a certain sense there can be no question of a theory modification, only of a program modification.</p>
+<p>从某种意义上说，这里不存在理论修改的问题，只有程序修改的问题。</p>
+<p>Indeed, a person having the theory must already be prepared to respond to the kinds of questions and demands that may give rise to program modifications.</p>
+<p>事实上，掌握理论的人必须已经准备好应对可能导致程序修改的各种问题和需求。</p>
+<p>This observation leads to the important conclusion that the problems of program modification arise from acting on the assumption that programming consists of program text production, instead of recognizing programming as an activity of theory building.</p>
+<p>这一观察导致了一个重要结论：程序修改的问题源于将编程视为程序文本生产，而非认识到编程是一种理论构建活动。</p>
+<p>On the basis of the Theory Building View the decay of a program text as a result of modifications made by programmers without a proper grasp of the underlying theory becomes understandable.</p>
+<p>基于理论构建视角，程序文本因程序员在缺乏对底层理论的充分理解情况下进行修改而导致的退化现象便可得到解释。</p>
+<p>As a matter of fact, if viewed merely as a change of the program text and of the external behaviour of the execution, a given desired modification may usually be realized in many different ways, all correct.</p>
+<p>事实上，若仅将程序文本及执行过程的外部行为视为变化，某一特定的预期修改通常可通过多种不同方式实现，且所有方式均正确。</p>
+<p>At the same time, if viewed in relation to the theory of the program these ways may look very different, some of them perhaps conforming to that theory or extending it in a natural way, while others may be wholly inconsistent with that theory, perhaps having the character of unintegrated patches on the main part of the program.</p>
+<p>然而，若从程序理论的角度审视，这些实现方式可能呈现出截然不同的特征：其中部分可能与理论相符或以自然方式扩展理论，而另一些则可能与理论完全不符，或许类似于对程序主体的零散补丁。</p>
+<p>This difference of character of various changes is one that can only make sense to the programmer who possesses the theory of the program.</p>
+<p>这种不同修改方式的本质差异，只有具备程序理论的程序员才能理解。</p>
+<p>At the same time the character of changes made in a program text is vital to the longer term viability of the program.</p>
+<p>同时，程序文本中修改的本质特征对程序的长期可行性至关重要。</p>
+<p>For a program to retain its quality it is mandatory that each modification is firmly grounded in the theory of it.</p>
+<p>为了保持程序的质量，每一次修改都必须牢固地建立在程序理论的基础上。</p>
+<p>Indeed, the very notion of qualities such as simplicity and good structure can only be understood in terms of the theory of the program, since they characterize the actual program text in relation to such program texts that might have been written to achieve the same execution behaviour, but which exist only as possibilities in the programmer’s understanding.</p>
+<p>事实上，简单性和良好结构等质量概念只能通过程序的理论来理解，因为它们描述了实际程序文本与那些可能被编写以实现相同执行行为的程序文本之间的关系，而这些程序文本仅存在于程序员的理解中。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="程序的生命死亡与复活"><a class="header" href="#程序的生命死亡与复活">程序的生命、死亡与复活</a></h1>
+<p>A main claim of the Theory Building View of programming is that an essential part of any program, the theory of it, is something that could not conceivably be expressed, but is inextricably bound to human beings.</p>
+<p>程序设计理论构建视角的核心主张之一是：任何程序的本质部分——其理论基础——是无法用语言表达的，但它与人类密不可分。</p>
+<p>It follows that in describing the state of the program it is important to indicate the extent to which programmers having its theory remain in charge of it.</p>
+<p>因此，在描述程序状态时，必须明确指出掌握其理论的程序员在多大程度上仍掌控着该程序。</p>
+<p>As a way in which to emphasize this circumstance one might extend the notion of program building by notions of program life, death, and revival.</p>
+<p>为了强调这一情况，可以将程序构建的概念扩展为程序的生命、死亡和复活的概念。</p>
+<p>The building of the program is the same as the building of the theory of it by and in the team of programmers.</p>
+<p>程序的构建与程序员团队构建其理论的过程是相同的。</p>
+<p>During the program life a programmer team possessing its theory remains in active control of the program, and in particular retains control over all modifications.</p>
+<p>在程序的生命周期中，拥有其理论的程序员团队始终对程序保持主动控制，特别是对所有修改保持控制。</p>
+<p>The death of a program happens when the programmer team possessing its theory is dissolved.</p>
+<p>程序的死亡发生在拥有其理论的程序员团队解散时。</p>
+<p>A dead program may continue to be used for execution in a computer and to produce useful results.</p>
+<p>一个已死的程序仍可在计算机中继续执行并产生有用结果。</p>
+<p>The actual state of death becomes visible when demands for modifications of the program cannot be intelligently answered.</p>
+<p>死亡的实际状态在无法合理回应对程序修改的需求时显现。</p>
+<p>Revival of a program is the rebuilding of its theory by a new programmer team.</p>
+<p>程序的复活是通过新程序员团队重建其理论实现的。</p>
+<p>The extended life of a program according to these notions depends on the taking over by new generations of programmers of the theory of the program.</p>
+<p>根据这些概念，程序的延长寿命取决于新世代程序员接管程序的理论。</p>
+<p>For a new programmer to come to possess an existing theory of a program it is insufficient that he or she has the opportunity to become familiar with the program text and other documentation.</p>
+<p>对于新程序员而言，仅有机会熟悉程序文本和其他文档是不够的。</p>
+<p>What is required is that the new programmer has the opportunity to work in close contact with the programmers who already possess the theory, so as to be able to become familiar with the place of the program in the wider context of the relevant real world situations and so as to acquire the knowledge of how the program works and how unusual program reactions and program modifications are handled within the program theory.</p>
+<p>所需的是，新程序员有机会与已经掌握该理论的程序员密切合作，以便能够了解该程序在相关现实世界情境的更广泛背景中的位置，并掌握该程序如何运作以及如何在程序理论框架内处理异常程序反应和程序修改的知识。</p>
+<p>This problem of education of new programmers in an existing theory of a program is quite similar to that of the educational problem of other activities where the knowledge of how to do certain things dominates over the knowledge that certain things are the case, such as writing and playing a music instrument.</p>
+<p>新程序员在现有程序理论中的教育问题，与其他活动中的教育问题非常相似，即在这些活动中，如何做某些事情的知识主导着某些事情是事实的知识，例如写作和演奏乐器。</p>
+<p>The most important educational activity is the student’s doing the relevant things under suitable supervision and guidance.</p>
+<p>最重要的教育活动是学生在适当的监督和指导下进行相关活动。</p>
+<p>In the case of programming the activity should include discussions of the relation between the program and the relevant aspects and activities of the real world, and of the limits set on the real world matters dealt with by the program.</p>
+<p>在编程领域，该活动应包括对程序与现实世界相关方面及活动之间关系的讨论，以及对程序处理的现实世界事务所设定的限制的探讨。</p>
+<p>A very important consequence of the Theory Building View is that program revival, that is reestablishing the theory of a program merely from the documentation, is strictly impossible.</p>
+<p>理论构建视角的一个非常重要的后果是，程序复活，即仅凭文档重新建立程序的理论，是严格不可能的。</p>
+<p>Lest this consequence may seem unreasonable it may be noted that the need for revival of an entirely dead program probably will rarely arise, since it is hardly conceivable that the revival would be assigned to new programmers without at least some knowledge of the theory had by the original team.</p>
+<p>为了避免这一后果显得不合理，可以指出，完全死去的程序需要复活的情况可能很少发生，因为很难想象复活任务会交给没有至少一些原始团队理论知识的新程序员。</p>
+<p>Even so the Theory Building View suggests strongly that program revival should only be attempted in exceptional situations and with full awareness that it is at best costly, and may lead to a revived theory that differs from the one originally had by the program authors and so may contain discrepancies with the program text.</p>
+<p>即便如此，理论构建视角强烈建议，程序复活仅应在特殊情况下尝试，且需充分意识到此举至少成本高昂，且可能导致复活后的理论与程序作者原有的理论存在差异，从而与程序文本产生不一致。</p>
+<p>In preference to program revival, the Theory Building View suggests, the existing program text should be discarded and the new–formed programmer team should be given the opportunity to solve the given problem afresh.</p>
+<p>相较于程序复活，理论构建视角建议应放弃现有程序文本，并给予新组建的程序员团队机会从头解决给定问题。</p>
+<p>Such a procedure is more likely to produce a viable program than program revival, and at no higher, and possibly lower, cost.</p>
+<p>此类程序更可能产生可行程序，且成本不会更高，甚至可能更低。</p>
+<p>The point is that building a theory to fit and support an existing program text is a difficult, frustrating, and time consuming activity.</p>
+<p>关键在于，为现有程序文本构建并支撑理论是一项困难、令人沮丧且耗时的活动。</p>
+<p>The new programmer is likely to feel torn between loyalty to the existing program text, with whatever obscurities and weaknesses it may contain, and the new theory that he or she has to build up, and which, for better or worse, most likely will differ from the original theory behind the program text.</p>
+<p>新程序员可能会在对现有程序文本的忠诚（无论其包含多少模糊点和弱点）与需要构建的新理论之间感到矛盾，而无论好坏，新理论很可能与程序文本背后的原始理论存在差异。</p>
+<p>Similar problems are likely to arise even when a program is kept continuously alive by an evolving team of programmers, as a result of the differences of competence and background experience of the individual programmers, particularly as the team is being kept operational by inevitable replacements of the individual members.</p>
+<p>即使程序由不断更迭的开发团队持续维护，类似问题也可能出现，这源于个体开发者在能力和背景经验上的差异，尤其当团队因不可避免的人员替换而维持运营时。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="方法和理论构建"><a class="header" href="#方法和理论构建">方法和理论构建</a></h1>
+<p>Recent years has seen much interest in programming methods.</p>
+<p>近年来，编程方法引起了广泛关注。</p>
+<p>In the present section some comments will be made on the relation between the Theory Building View and the notions behind programming methods.</p>
+<p>在本节中，我们将探讨理论构建视角与编程方法背后的概念之间的关系。</p>
+<p>To begin with, what is a programming method? This is not always made clear, even by authors who recommend a particular method.</p>
+<p>首先，什么是编程方法？这一点往往并不明确，即使是推荐特定方法的作者也未必能清晰阐述。</p>
+<p>Here a programming method will be taken to be a set of work rules for programmers, telling what kind of things the programmers should do, in what order, which notations or languages to use, and what kinds of documents to produce at various stages.</p>
+<p>在此，编程方法将被定义为一套针对程序员的工作规则，规定程序员应执行何种任务、以何种顺序执行、使用何种记号或语言，以及在不同阶段应产出何种文档。</p>
+<p>In comparing this notion of method with the Theory Building View of programming, the most important issue is that of actions or operations and their ordering.</p>
+<p>在将这种方法概念与编程的理论构建视角进行比较时，最核心的问题在于动作或操作及其顺序。</p>
+<p>A method implies a claim that program development can and should proceed as a sequence of actions of certain kinds, each action leading to a particular kind of documented result.</p>
+<p>方法暗示了一种主张，即程序开发可以且应当作为一系列特定类型的操作序列进行，每项操作都会产生特定类型的文档化结果。</p>
+<p>In building the theory there can be no particular sequence of actions, for the reason that a theory held by a person has no inherent division into parts and no inherent ordering.</p>
+<p>在构建理论时，不存在特定的操作序列，因为一个人所持有的理论本身并不具备内在的分部结构或内在的顺序。</p>
+<p>Rather, the person possessing a theory will be able to produce presentations of various sorts on the basis of it, in response to questions or demands.</p>
+<p>相反，拥有理论的人可以基于该理论，根据问题或需求，生成各种形式的呈现。</p>
+<p>As to the use of particular kinds of notation or formalization, again this can only be a secondary issue since the primary item, the theory, is not, and cannot be, expressed, and so no question of the form of its expression arises.</p>
+<p>至于使用特定类型的记号或形式化，这同样只能是次要问题，因为主要对象——理论本身——无法被表达，因此其表达形式的问题也不存在。</p>
+<p>It follows that on the Theory Building View, for the primary activity of the programming there can be no right method.</p>
+<p>由此可知，在理论构建视角下，程序开发的主要活动不存在正确的方法。</p>
+<p>This conclusion may seem to conflict with established opinion, in several ways, and might thus be taken to be an argument against the Theory Building View.</p>
+<p>这一结论似乎与既定观点在多个方面相冲突，因此可能被视为对理论构建视角的反驳。</p>
+<p>Two such apparent contradictions shall be taken up here, the first relating to the importance of method in the pursuit of science, the second concerning the success of methods as actually used in software development.</p>
+<p>这里将探讨两个此类看似矛盾的观点，第一个涉及科学追求中方法的重要性，第二个涉及软件开发中实际使用的方法的成功性。</p>
+<p>The first argument is that software development should be based on scientific manners, and so should employ procedures similar to scientific methods.</p>
+<p>第一个论点是，软件开发应基于科学方法，因此应采用与科学方法类似的程序。</p>
+<p>The flaw of this argument is the assumption that there is such a thing as scientific method and that it is helpful to scientists.</p>
+<p>这一论点的缺陷在于假设存在所谓的科学方法，且它对科学家有所帮助。</p>
+<p>This question has been the subject of much debate in recent years, and the conclusion of such authors as Feyerabend [2], taking his illustrations from the history of physics, and Medawar [5], arguing as a biologist, is that the notion of scientific method as a set of guidelines for the practising scientist is mistaken.</p>
+<p>这一问题近年来引发了广泛讨论，Feyerabend [2]（以物理学史为例）和 Medawar [5]（作为生物学家）等学者的结论是，将科学方法视为指导实践科学家的准则集的观念是错误的。</p>
+<p>This conclusion is not contradicted by such work as that of Polya [8, 9] on problem solving.</p>
+<p>这一结论并未与 Polya [8, 9]关于问题解决的研究相矛盾。</p>
+<p>This work takes its illustrations from the field of mathematics and leads to insight which is also highly relevant to programming.</p>
+<p>该研究以数学领域为例，得出的洞见对编程同样具有高度相关性。</p>
+<p>However, it cannot be claimed to present a method on which to proceed.</p>
+<p>然而，它并不能被视为一种可遵循的方法。</p>
+<p>Rather, it is a collection of suggestions aiming at stimulating the mental activity of the problem solver, by pointing out different modes of work that may be applied in any sequence.</p>
+<p>相反，它是一系列旨在通过指出可按任意顺序应用的不同工作模式，来激发问题解决者思维活动的建议。</p>
+<p>The second argument that may seem to contradict the dismissal of method of the Theory Building View is that the use of particular methods has been successful, according to published reports.</p>
+<p>第二个看似与理论构建视角对方法的否定相矛盾的论点是：根据已发表的报告，特定方法的使用已取得成功。</p>
+<p>To this argument it may be answered that a methodically satisfactory study of the efficacy of programming methods so far never seems to have been made.</p>
+<p>对此论点可回应称，迄今为止似乎从未进行过对编程方法有效性进行方法论上令人满意的研究。</p>
+<p>Such a study would have to employ the well established technique of controlled experiments (cf. Brooks, 1980 [1] or Moher and Schneider, 1982 [6]).</p>
+<p>此类研究必须采用已确立的控制实验技术（参见 Brooks, 1980 [1] 或 Moher 和 Schneider, 1982 [6]）。</p>
+<p>The lack of such studies is explainable partly by the high cost that would undoubtedly be incurred in such investigations if the results were to be significant, partly by the problems of establishing in an operational fashion the concepts underlying what is called methods in the field of program development.</p>
+<p>缺乏此类研究的原因部分在于，若要使研究结果具有显著性，此类调查无疑将产生高昂成本，部分在于在程序开发领域中，将所谓“方法”背后的概念以可操作的方式确立所面临的难题。</p>
+<p>Most published reports on such methods merely describe and recommend certain techniques and procedures, without establishing their usefulness or efficacy in any systematic way.</p>
+<p>大多数关于此类方法的已发表报告仅描述并推荐某些技术和程序，而未以系统方式建立其有用性或有效性。</p>
+<p>An elaborate study of five different methods by C. Floyd and several co–workers [3] concludes that the notion of methods as systems of rules that in an arbitrary context and mechanically will lead to good solutions is an illusion.</p>
+<p>C. Floyd 及其多位合作者 [3] 对五种不同方法的详细研究得出结论：将方法视为在任意上下文中机械地导致良好解决方案的规则系统是一种幻觉。</p>
+<p>What remains is the effect of methods in the education of programmers.</p>
+<p>剩下的问题是方法在程序员教育中的作用。</p>
+<p>This conclusion is entirely compatible with the Theory Building View of programming.</p>
+<p>这一结论与编程的理论构建视角完全一致。</p>
+<p>Indeed, on this view the quality of the theory built by the programmer will depend to a large extent on the programmer’s familiarity with model solutions of typical problems, with techniques of description and verification, and with principles of structuring systems consisting of many parts in complicated interactions.</p>
+<p>事实上，从这一视角来看，程序员构建的理论质量在很大程度上取决于其对典型问题模型解决方案的熟悉程度，对描述与验证技术的掌握，以及对由复杂交互的多个部分组成的系统结构原则的理解。</p>
+<p>Thus many of the items of concern of methods are relevant to theory building.</p>
+<p>因此，方法论关注的许多内容与理论构建相关。</p>
+<p>Where the Theory Building View departs from that of the methodologists is on the question of which techniques to use and in what order.</p>
+<p>理论构建视角与方法论视角的分歧在于，在选择使用哪些技术以及以何种顺序使用这些技术的问题上。</p>
+<p>On the Theory Building View this must remain entirely a matter for the programmer to decide, taking into account the actual problem to be solved.</p>
+<p>在理论构建视角下，这完全应由程序员根据实际需要解决的问题来决定。</p>
+<hr />
+<ol>
+<li>Brooks, R. E. Studying programmer behaviour experimentally. Comm. ACM 23(4): 207–213, 1980.</li>
+<li>Feyerabend, P. Against Method. London, Verso Editions, 1978; ISBN: 86091–700–2.</li>
+<li>Floyd, C. Eine Untersuchung von Software–Entwicklungs–Methoden. Pp. 248–274 in Programmierumgebungen und Compiler, ed H. Morgenbrod and W. Sammer, Tagung I/1984 des German Chapter of the ACM, Stuttgart, Teubner Verlag, 1984; ISBN: 3–519–02437–3.</li>
+<li>Kuhn, T.S. The Structure of Scientific Revolutions, Second Edition. Chicago, University of Chicago Press, 1970; ISBN: 0–226–45803–2.</li>
+<li>Medawar, P. Pluto’s Republic. Oxford, University Press, 1982: ISBN: 0–19–217726–5.</li>
+<li>Moher, T., and Schneider, G. M. Methodology and experimental research in software engineering, Int. J. Man–Mach. Stud. 16: 65–87, 1. Jan. 1982.</li>
+<li>Oskarsson, ¨O Mechanisms of modifiability in large software systems Link¨oping Studies in Science and Technology, Dissertations, no. 77, Link¨oping, 1982; ISBN: 91–7372–527–7.</li>
+<li>Polya, G. How To Solve It . New York, Doubleday Anchor Book, 1957.</li>
+<li>Polya, G. Mathematics and Plausible Reasoning. New Jersey, Princeton University Press, 1954.</li>
+<li>Popper, K. R., and Eccles, J. C. The Self and Its Brain. London, Routledge and Kegan Paul, 1977.</li>
+<li>Ryle, G. The Concept of Mind. Harmondsworth, England, Penguin, 1963, first published 1949. Applying “Theory Building”</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="程序员的地位与理论构建观点"><a class="header" href="#程序员的地位与理论构建观点">程序员的地位与理论构建观点</a></h1>
+<p>The areas where the consequences of the Theory Building View contrast most strikingly with those of the more prevalent current views are those of the programmers’ personal contribution to the activity and of the programmers’ proper status.</p>
+<p>理论构建视角与当前更为主流的观点在以下两个方面存在最显著的差异：程序员对活动个人贡献的看法以及程序员的适当地位。</p>
+<p>The contrast between the Theory Building View and the more prevalent view of the programmers’ personal contribution is apparent in much of the common discussion of programming.</p>
+<p>理论构建视角与主流观点在程序员个人贡献方面的差异在编程领域的常见讨论中显而易见。</p>
+<p>As just one example, consider the study of modifiability of large software systems by Oskarsson [7].</p>
+<p>以 Oskarsson [7] 对大型软件系统可修改性的研究为例。</p>
+<p>This study gives extensive information on a considerable number of modifications in one release of a large commercial system.</p>
+<p>该研究对某大型商业系统某一版本中的大量修改提供了详尽信息。</p>
+<p>The description covers the background, substance, and implementation, of each modification, with particular attention to the manner in which the program changes are confined to particular program modules.</p>
+<p>描述涵盖了每项修改的背景、内容和实现方式，特别关注程序变更如何局限于特定程序模块。</p>
+<p>However, there is no suggestion whatsoever that the implementation of the modifications might depend on the background of the 500 programmers employed on the project, such as the length of time they have been working on it, and there is no indication of the manner in which the design decisions are distributed among the 500 programmers.</p>
+<p>然而，研究中完全没有提及修改的实现可能取决于参与项目的 500 名程序员的背景，例如他们参与项目的时间长短，也没有说明设计决策在 500 名程序员中的分配方式。</p>
+<p>Even so the significance of an underlying theory is admitted indirectly in statements such as that ‘decisions were implemented in the wrong block’ and in a reference to ‘a philosophy of AXE’.</p>
+<p>即便如此，底层理论的重要性仍通过诸如“决策被错误地实施在错误的模块中”以及对“AXE 哲学”的提及等表述间接承认。</p>
+<p>However, by the manner in which the study is conducted these admissions can only remain isolated indications.</p>
+<p>然而，由于研究的开展方式，这些承认只能作为孤立的迹象存在。</p>
+<p>More generally, much current discussion of programming seems to assume that programming is similar to industrial production, the programmer being regarded as a component of that production, a component that has to be controlled by rules of procedure and which can be replaced easily.</p>
+<p>更普遍地说，当前关于编程的大部分讨论似乎假设编程类似于工业生产，程序员被视为生产过程中的一个组成部分，一个必须受程序规则控制且可以轻易替换的组成部分。</p>
+<p>Another related view is that human beings perform best if they act like machines, by following rules, with a consequent stress on formal modes of expression, which make it possible to formulate certain arguments in terms of rules of formal manipulation.</p>
+<p>另一种相关观点认为，人类如果像机器一样遵循规则行事，就能发挥最佳水平，因此强调形式化的表达方式，这使得某些论点可以以形式化操作规则的形式进行表述。</p>
+<p>Such views agree well with the notion, seemingly common among persons working with computers, that the human mind works like a computer.</p>
+<p>这些观点与计算机从业者中普遍存在的观念相契合，即人类思维运作方式类似于计算机。</p>
+<p>At the level of industrial management these views support treating programmers as workers of fairly low responsibility, and only brief education.</p>
+<p>在工业管理层面，这些观点支持将程序员视为责任较轻、仅需简短培训的工人。</p>
+<p>On the Theory Building View the primary result of the programming activity is the theory held by the programmers.</p>
+<p>在理论构建视角下，编程活动的首要成果是程序员所持有的理论。</p>
+<p>Since this theory by its very nature is part of the mental possession of each programmer, it follows that the notion of the programmer as an easily replaceable component in the program production activity has to be abandoned.</p>
+<p>由于这种理论本质上是每位程序员的心理财富，因此必须放弃将程序员视为程序生产活动中可轻易替换的组件这一观念。</p>
+<p>Instead the programmer must be regarded as a responsible developer and manager of the activity in which the computer is a part.</p>
+<p>相反，程序员必须被视为计算机作为其中一部分的活动中的负责任开发者和管理者。</p>
+<p>In order to fill this position he or she must be given a permanent position, of a status similar to that of other professionals, such as engineers and lawyers, whose active contributions as employers of enterprises rest on their intellectual proficiency.</p>
+<p>为了担任这一角色，他或她必须获得一个永久职位，其地位应与其他专业人士（如工程师和律师）相当，这些专业人士作为企业雇主的积极贡献基于其智力专业能力。</p>
+<p>The raising of the status of programmers suggested by the Theory Building View will have to be supported by a corresponding reorientation of the programmer education.</p>
+<p>理论构建视角所提议的程序员地位提升，必须通过相应的程序员教育改革来支持。</p>
+<p>While skills such as the mastery of notations, data representations, and data processes, remain important, the primary emphasis would have to turn in the direction of furthering the understanding and talent for theory formation.</p>
+<p>虽然掌握符号、数据表示和数据处理等技能仍然重要，但重点必须转向促进对理论构建的理解和才能。</p>
+<p>To what extent this can be taught at all must remain an open question.</p>
+<p>这种能力在多大程度上可以教授，仍是一个开放的问题。</p>
+<p>The most hopeful approach would be to have the student work on concrete problems under guidance, in an active and constructive environment.</p>
+<p>最有希望的方法是让学生在指导下，在一个积极和建设性的环境中解决具体问题。</p>
+<hr />
+<ol>
+<li>Brooks, R. E. Studying programmer behaviour experimentally. Comm. ACM 23(4): 207–213, 1980.</li>
+<li>Feyerabend, P. Against Method. London, Verso Editions, 1978; ISBN: 86091–700–2.</li>
+<li>Floyd, C. Eine Untersuchung von Software–Entwicklungs–Methoden. Pp. 248–274 in Programmierumgebungen und Compiler, ed H. Morgenbrod and W. Sammer, Tagung I/1984 des German Chapter of the ACM, Stuttgart, Teubner Verlag, 1984; ISBN: 3–519–02437–3.</li>
+<li>Kuhn, T.S. The Structure of Scientific Revolutions, Second Edition. Chicago, University of Chicago Press, 1970; ISBN: 0–226–45803–2.</li>
+<li>Medawar, P. Pluto’s Republic. Oxford, University Press, 1982: ISBN: 0–19–217726–5.</li>
+<li>Moher, T., and Schneider, G. M. Methodology and experimental research in software engineering, Int. J. Man–Mach. Stud. 16: 65–87, 1. Jan. 1982.</li>
+<li>Oskarsson, ¨O Mechanisms of modifiability in large software systems Link¨oping Studies in Science and Technology, Dissertations, no. 77, Link¨oping, 1982; ISBN: 91–7372–527–7.</li>
+<li>Polya, G. How To Solve It . New York, Doubleday Anchor Book, 1957.</li>
+<li>Polya, G. Mathematics and Plausible Reasoning. New Jersey, Princeton University Press, 1954.</li>
+<li>Popper, K. R., and Eccles, J. C. The Self and Its Brain. London, Routledge and Kegan Paul, 1977.</li>
+<li>Ryle, G. The Concept of Mind. Harmondsworth, England, Penguin, 1963, first published 1949. Applying “Theory Building”</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="结论"><a class="header" href="#结论">结论</a></h1>
+<p>Accepting program modifications demanded by changing external circumstances to be an essential part of programming, it is argued that the primary aim of programming is to have the programmers build a theory of the way the matters at hand may be supported by the execution of a program.</p>
+<p>将程序修改视为应对外部环境变化的必要组成部分，有人认为编程的主要目的是让程序员构建一种理论，即当前事务如何通过程序的执行得到支持。</p>
+<p>Such a view leads to a notion of program life that depends on the continued support of the program by programmers having its theory.</p>
+<p>这种观点导致了一种程序生命周期的概念，即程序的生命周期取决于拥有其理论的程序员对程序的持续支持。</p>
+<p>Further, on this view the notion of a programming method, understood as a set of rules of procedure to be followed by the programmer, is based on invalid assumptions and so has to be rejected.</p>
+<p>此外，从这种观点来看，将编程方法理解为程序员必须遵循的一套程序规则的概念，是基于无效假设的，因此必须被拒绝。</p>
+<p>As further consequences of the view, programmers have to be accorded the status of responsible, permanent developers and managers of the activity of which the computer is a part, and their education has to emphasize the exercise of theory building, side by side with the acquisition of knowledge of data processing and notations.</p>
+<p>作为这种观点的进一步后果，程序员必须被赋予负责、永久开发和管理计算机所参与的活动的地位，他们的教育必须强调理论构建的实践，与数据处理和符号系统的知识获取并行。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="应用理论构建"><a class="header" href="#应用理论构建">应用「理论构建」</a></h1>
+<p>Viewing programming as theory building helps us understand “metaphor building” activity in Extreme Programming (XP), and the respective roles of tacit knowledge and documentation in passing along design knowledge.</p>
+<p>将编程视为理论构建有助于我们理解极端编程（XP）中的“隐喻构建”活动，以及 tacit 知识和文档在传递设计知识中的各自作用。</p>
+<h2 id="the-metaphor-as-a-theory-隐喻作为理论"><a class="header" href="#the-metaphor-as-a-theory-隐喻作为理论">The Metaphor as a Theory. 隐喻作为理论。</a></h2>
+<p>Kent Beck suggested that it is useful to a design team to simplify the general design of a program to match a single metaphor.</p>
+<p>Kent Beck 建议，将程序的整体设计简化为与单一隐喻相匹配，对设计团队是有益的。</p>
+<p>Examples might be, “This program really looks like an assembly line, with things getting added to a chassis along the line,” or “This program really looks like a restaurant, with waiters and menus, cooks and cashiers.” If the metaphor is good, the many associations the designers create around the metaphor turn out to be appropriate to their programming situation.</p>
+<p>例如，“这个程序看起来就像一条装配线，沿着生产线不断添加部件”，或者“这个程序看起来就像一家餐厅，有服务员和菜单、厨师和收银员”。如果隐喻恰当，设计师围绕隐喻建立的各种联想将与他们的编程情境相契合。</p>
+<p>That is exactly Naur’s idea of passing along a theory of the design.</p>
+<p>这正是 Naur 关于传递设计理论的观点。</p>
+<p>If “assembly line” is an appropriate metaphor, then later programmers, considering what they know about assembly lines, will make guesses about the structure of the software at hand and find that their guesses are “close.” That is an extraordinary power for just the two words, “assembly line.” The value of a good metaphor increases with the number of designers.</p>
+<p>如果“装配线”是一个恰当的比喻，那么后来程序员在考虑他们对装配线的了解时，会对当前软件的结构做出猜测，并发现他们的猜测是“接近的”。这仅仅是“装配线”这两个词所蕴含的非凡力量。一个好比喻的价值随着设计师数量的增加而增加。</p>
+<p>The closer each person’s guess is “close” to the other people’s guesses, the greater the resulting consistency in the final system design.</p>
+<p>每个人猜测的“接近度”与他人猜测的接近度越高，最终系统设计的一致性就越强。</p>
+<p>Imagine 10 programmers working as fast as they can, in parallel, each making design decisions and adding classes as she goes.</p>
+<p>想象 10 名程序员以最快速度并行工作，各自在编写代码时做出设计决策并添加类。</p>
+<p>Each will necessarily develop her own theory as she goes.</p>
+<p>每个人在工作中必然会形成自己的理论。</p>
+<p>As each adds code, the theory that binds their work becomes less and less coherent, more and more complicated.</p>
+<p>随着每个人添加代码，将他们的工作联系在一起的理论变得越来越不连贯，越来越复杂。</p>
+<p>Not only maintenance gets harder, but their own work gets harder.</p>
+<p>不仅维护变得困难，他们自己的工作也变得困难。</p>
+<p>The design easily becomes a “kludge.” If they have a common theory, on the other hand, they add code in ways that fit together.</p>
+<p>设计很容易变成“权宜之计”。另一方面，如果他们有一个共同的理论，他们添加代码的方式会相互契合。</p>
+<p>An appropriate, shared metaphor lets a person guess accurately where someone else on the team just added code, and how to fit her new piece in with it.</p>
+<p>一个恰当的、共享的比喻能让团队成员准确推测他人刚添加代码的位置，并知道如何将自己的新代码与之衔接。</p>
+<h2 id="tacit-knowledge-and-documentation-tacit-knowledge-和文档"><a class="header" href="#tacit-knowledge-and-documentation-tacit-knowledge-和文档">Tacit Knowledge and Documentation. Tacit Knowledge 和文档。</a></h2>
+<p>The documentation is almost certainly behind the current state of the program, but people are good at looking around.</p>
+<p>文档几乎肯定落后于程序的当前状态，但人们擅长观察环境。</p>
+<p>What should you put into the documentation? That which helps the next programmer build an adequate theory of the program.</p>
+<p>文档中应包含什么内容？那些能帮助下一位程序员构建程序充分理论的内容。</p>
+<p>This is enormously important.</p>
+<p>这极为重要。</p>
+<p>The purpose of the documentation is to jog memories in the reader, set up relevant pathways of thought about experiences and metaphors.</p>
+<p>文档的目的是唤起读者的记忆，建立与经验和隐喻相关的思维路径。</p>
+<p>This sort of documentation is more stable over the life of the program than just naming the pieces of the system currently in place.</p>
+<p>此类文档在程序生命周期中比仅仅命名当前系统中的各个部分更为稳定。</p>
+<p>The designers are allowed to use whatever forms of expression are necessary to set up those relevant pathways.</p>
+<p>设计师可以使用任何必要的表达形式来建立这些相关路径。</p>
+<p>They can even use multiple metaphors, if they don’t find one that is adequate for the entire program.</p>
+<p>如果找不到一个适用于整个程序的隐喻，他们甚至可以使用多个隐喻。</p>
+<p>They might say that one section implements a fractal compression algorithm, a second is like an accounting ledger, the user interface follows the model-observer design pattern, and so on.</p>
+<p>他们可能会说，某一模块实现了分形压缩算法，另一模块类似于会计账簿，用户界面遵循模型-观察者设计模式，等等。</p>
+<p>Experienced designers often start their documentation with just</p>
+<p>有经验的设计师通常会从以下三点开始文档编写：</p>
+<ul>
+<li>The metaphors 隐喻</li>
+<li>Text describing the purpose of each major component 描述每个主要组件目的的文本</li>
+<li>Drawings of the major interactions between the major components 主要组件之间主要交互的示意图</li>
+</ul>
+<p>These three items alone take the next team a long way to constructing a useful theory of the design.</p>
+<p>仅这三项内容就能为下一支团队构建有用的设计理论提供很大帮助。</p>
+<p>The source code itself serves to communicate a theory to the next programmer.</p>
+<p>源代码本身用于向下一位程序员传达理论。</p>
+<p>Simple, consistent naming conventions help the next person build a coherent theory.</p>
+<p>简单一致的命名规范有助于下一位开发者构建连贯的系统理论。</p>
+<p>When people talk about “clean code,” a large part of what they are referring to is how easily the reader can build a coherent theory of the system.</p>
+<p>当人们谈论“干净代码”时，很大程度上指的是读者构建系统连贯理论的便捷性。</p>
+<p>Documentation cannot—and so need not—say everything.</p>
+<p>文档无需——也不必——涵盖所有内容。</p>
+<p>Its purpose is to help the next programmer build an accurate theory about the system.</p>
+<p>其目的是帮助下一位程序员构建关于系统的准确理论。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
